@@ -8,10 +8,11 @@ using Microsoft.Extensions.Logging;
 using _2122_Senior_Project_06.Models;
 namespace _2122_Senior_Project_06.Controllers
 {
+    [ApiController]
+    [Route("[controller]")]
     public class JournalController: ControllerBase
     {
-        [ApiController]
-        [Route("[controller]")]
+        
 
         [HttpGet]
         public List<JournalEntry> Get() {

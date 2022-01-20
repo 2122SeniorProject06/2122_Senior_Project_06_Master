@@ -1,5 +1,5 @@
 using Microsoft.AspNetCore.Http;
-using _2122_Senior_Project_06;
+using _2122_Senior_Project_06.Models;
 using Microsoft.AspNetCore.Mvc;
 using System;
 using System.Collections.Generic;
@@ -9,11 +9,12 @@ using Microsoft.Extensions.Logging;
 
 namespace _2122_Senior_Project_06.Controllers
 {
+    [ApiController]
+    [Route("[controller]")]
+
     public class LoginController : ControllerBase
     {
-        [ApiController]
-        [Route("[controller]")]
-
+        
         [HttpPost]
         public bool AuthenticateUser(LoginPage loginModel){
             //authenticate user from database
