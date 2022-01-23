@@ -14,6 +14,7 @@ namespace  _2122_Senior_Project_06.Models
 
         private string _username;
         private string _password;
+        public int _id {get;}
 
         #endregion
 

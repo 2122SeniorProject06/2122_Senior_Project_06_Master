@@ -21,6 +21,7 @@ namespace _2122_Senior_Project_06
                 .ConfigureWebHostDefaults(webBuilder =>
                 {
                     webBuilder.UseStartup<Startup>();
+                    
                 });
     }
 }

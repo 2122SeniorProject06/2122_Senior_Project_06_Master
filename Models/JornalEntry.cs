@@ -12,7 +12,8 @@ namespace  _2122_Senior_Project_06.Models
     {
         public string _title {get; set;}
         public string _body {get; set;}
-
+        public int _userId {get;}
+        public int _id {get;}
 
     }
 }
