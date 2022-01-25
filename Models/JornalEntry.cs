@@ -2,6 +2,7 @@ using System;
 using System.ComponentModel;
 using System.Runtime.CompilerServices;
 using System.ComponentModel.DataAnnotations.Schema;
+using System.ComponentModel.DataAnnotations;
 namespace  _2122_Senior_Project_06.Models
 {
     /// <summary>
@@ -15,7 +16,8 @@ namespace  _2122_Senior_Project_06.Models
         
         public int _userId {get;}
         [DatabaseGenerated(DatabaseGeneratedOption.Identity)]
-        public int _id {get;}
+        [Key]
+        public int _id {get; private set;}
 
     }
 }
