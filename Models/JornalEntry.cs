@@ -1,7 +1,7 @@
 using System;
 using System.ComponentModel;
 using System.Runtime.CompilerServices;
-
+using System.ComponentModel.DataAnnotations.Schema;
 namespace  _2122_Senior_Project_06.Models
 {
     /// <summary>
@@ -12,7 +12,9 @@ namespace  _2122_Senior_Project_06.Models
     {
         public string _title {get; set;}
         public string _body {get; set;}
+        
         public int _userId {get;}
+        [DatabaseGenerated(DatabaseGeneratedOption.Identity)]
         public int _id {get;}
 
     }
