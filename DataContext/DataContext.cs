@@ -4,9 +4,9 @@ using _2122_Senior_Project_06.Models;
 
 namespace _2122_Senior_Project_06.DataContext
 {
-    public class DataContext : DbContext
+    public class ShardContext : DbContext
     {
-        public DataContext(DbContextOptions<DataContext> options)
+        public ShardContext(DbContextOptions<ShardContext> options)
             : base(options)
         {
 

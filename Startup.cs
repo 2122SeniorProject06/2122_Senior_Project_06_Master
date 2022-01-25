@@ -9,8 +9,12 @@ using Microsoft.AspNetCore.Mvc;
 using Microsoft.Extensions.Configuration;
 using Microsoft.Extensions.DependencyInjection;
 using Microsoft.Extensions.Hosting;
+using Microsoft.EntityFrameworkCore.SqlServer;
+using Microsoft.EntityFrameworkCore;
 using Microsoft.Extensions.Logging;
 using Microsoft.OpenApi.Models;
+using _2122_Senior_Project_06.DataContext;
+
 
 namespace _2122_Senior_Project_06
 {
@@ -26,6 +30,12 @@ namespace _2122_Senior_Project_06
         // This method gets called by the runtime. Use this method to add services to the container.
         public void ConfigureServices(IServiceCollection services)
         {
+           services.AddControllers();
+           services.AddMvc();
+           //Connection String for Database
+            services.AddDbContext<ShardContext>(options => {
+                options.UseSqlServer(Configuration.GetConnectionString("ShardDB"));
+            });
         }
 
         // This method gets called by the runtime. Use this method to configure the HTTP request pipeline.
@@ -37,9 +47,10 @@ namespace _2122_Senior_Project_06
                 
             }
 
-            app.UseHttpsRedirection();
+            //app.UseHttpsRedirection();
 
             app.UseRouting();
+            app.UseAuthentication();
 
             app.UseAuthorization();
 
@@ -47,6 +58,10 @@ namespace _2122_Senior_Project_06
             {
                 endpoints.MapControllers();
             });
+            using (var serviceScope = app.ApplicationServices.GetService<IServiceScopeFactory>().CreateScope()) {
+                var context = serviceScope.ServiceProvider.GetRequiredService<ShardContext>();
+                context.Database.EnsureCreated();
+            }
         }
     }
 }
