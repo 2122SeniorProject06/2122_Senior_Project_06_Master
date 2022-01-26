@@ -34,8 +34,15 @@ namespace _2122_Senior_Project_06
            services.AddMvc();
            //Connection String for Database
             services.AddDbContext<ShardContext>(options => {
-                options.UseSqlServer(Configuration.GetConnectionString("ShardDB"));
+                options.UseSqlServer(DecryptDBString());
             });
+        }
+
+        private string DecryptDBString()
+        {
+            string encodedConnectionString = Configuration.GetConnectionString("ShardDB");
+            var decryptedBytes = System.Convert.FromBase64String(encodedConnectionString);
+            return System.Text.Encoding.UTF8.GetString(decryptedBytes);
         }
 
         // This method gets called by the runtime. Use this method to configure the HTTP request pipeline.
