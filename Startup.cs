@@ -32,6 +32,7 @@ namespace _2122_Senior_Project_06
         {
            services.AddControllers();
            services.AddMvc();
+           SqlDatabase.DatabaseAccess.SetupDatabase(Configuration);
            //Connection String for Database
             services.AddDbContext<ShardContext>(options => {
                 options.UseSqlServer(DecryptDBString());
