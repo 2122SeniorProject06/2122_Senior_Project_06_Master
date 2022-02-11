@@ -16,5 +16,17 @@ namespace _2122_Senior_Project_06.SqlDatabase
             var encodedConnectionString = configuration.GetConnectionString("ShardDB");
             DatabaseConnection.ConfigureConnectionString(encodedConnectionString);
         }
+
+        public static void CreateTable()
+        {
+            string request = "CREATE TABLE TestTable (FirstName varchar(255), LastName varchar(255));";
+            DatabaseConnection.SendRequest(request);
+        }
+
+        public static void SelectAll()
+        {
+            string request = "SELECT * FROM TestTable;";
+            DatabaseConnection.SendRequest(request);
+        }
     }
 }

@@ -6,6 +6,7 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Threading.Tasks;
 using Microsoft.Extensions.Logging;
+using _2122_Senior_Project_06.SqlDatabase;
 
 namespace _2122_Senior_Project_06.Controllers
 {
@@ -19,6 +20,12 @@ namespace _2122_Senior_Project_06.Controllers
         public bool AuthenticateUser(LoginPage loginModel){
             //authenticate user from database
             return false;
+        }
+
+        [HttpGet]
+        public void TestFunction()
+        {
+            DatabaseAccess.SelectAll();
         }
     }
 }
