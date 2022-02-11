@@ -21,11 +21,5 @@ namespace _2122_Senior_Project_06.Controllers
             //authenticate user from database
             return false;
         }
-
-        [HttpGet]
-        public void TestFunction()
-        {
-            DatabaseAccess.SelectAll();
-        }
     }
 }

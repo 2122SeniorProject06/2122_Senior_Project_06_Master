@@ -23,10 +23,28 @@ namespace _2122_Senior_Project_06.SqlDatabase
             DatabaseConnection.SendRequest(request);
         }
 
-        public static void SelectAll()
+        public static void Select(string itemsToSelect, string tableName, string requirements = null)
         {
-            string request = "SELECT * FROM TestTable;";
+            string request = string.Format("SELECT {0} FROM {1};", itemsToSelect, tableName);
+            if(requirements != null)
+            {
+                string condition = string.Format(" WHERE {0};", requirements);
+                request.Replace(";", condition);
+            }
             DatabaseConnection.SendRequest(request);
+        }
+
+        private string SelectFormatter(string tableName, string itemsToSelect = null, string requirements = null)
+        {
+            string request = "SELECT {0} FROM {1}{2};";
+            string items = itemsToSelect ?? "*";
+            string condition = string.Empty;
+            if (requirements != null)
+            {
+                condition = string.Format(" WHERE {0}", requirements);
+            }
+
+            return string.Format(request, items, tableName, condition);
         }
     }
 }
