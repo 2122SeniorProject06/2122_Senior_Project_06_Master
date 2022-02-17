@@ -26,7 +26,19 @@ namespace _2122_Senior_Project_06.SqlDatabase
         public static void CreateTable(string tableName, string values)
         {
             string request = string.Format("CREATE TABLE {0} ({1});", tableName, values);
-            DatabaseConnection.SendRequest(request);
+            try
+            {
+                DatabaseConnection.SendRequest(request);
+            }
+            catch(Exception e)
+            {
+                Console.WriteLine(e.Message);
+                if(e.Message != "There is already an object named '{0}' in the database.")
+                {
+                    Console.WriteLine(e.GetType());
+                    Console.WriteLine(e.StackTrace);
+                }
+            }
         }
 
         /// <summary>
