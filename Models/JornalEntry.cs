@@ -11,13 +11,24 @@ namespace  _2122_Senior_Project_06.Models
     /// <remarks> Made by Hugo Mazariego. Last update 12/09/2021. </remarks>
     public class JournalEntry 
     {
-        public string _title {get; set;}
-        public string _body {get; set;}
-        
-        public int _userId {get;}
         [DatabaseGenerated(DatabaseGeneratedOption.Identity)]
         [Key]
         public int _id {get; private set;}
+        public string _title {get; set;}
+        public string _body {get; set;}
+        public int _userId {get; private set;}
 
+        public JournalEntry ()
+        {
+            
+        }
+
+        public JournalEntry(int id, string title, string body, int userID)
+        {
+            _id = id;
+            _title = title;
+            _body = body;
+            _userId = userID;
+        }
     }
 }
