@@ -38,5 +38,35 @@ namespace _2122_Senior_Project_06.Controllers
             //DatabaseAccess.AddEntryToTable(mainTable, "10, 'Always Around...', 'I thought I was going crazy, but I swear I've seen flashes of something in the corner of my eye.', 8");
             //DatabaseAccess.AddEntryToTable(mainTable, "66, 'No Escape', 'GetOutGetOutGetOutGetOutGetOutGetOutGetOutGetOutGetOutGetOut', 8");
         }
+        
+         // CREATE
+        [HttpPost]
+        public IActionResult Create()
+        {
+            var journalEntry = new JournalEntry();
+            return Ok();
+        }
+
+        // UPDATE
+        public IActionResult Update()
+        {
+            
+            return Ok();
+        }
+
+        // GET
+        [HttpGet]
+        public List<JournalEntry> Get() 
+        {
+            // gets the list of journal entries
+            return new List<JournalEntry>();
+        }
+
+        // DELETE
+        [HttpDelete]
+        public IActionResult Delete()
+        {
+            return Ok();
+        }
     }
 }

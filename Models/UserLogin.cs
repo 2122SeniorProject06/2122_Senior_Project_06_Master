@@ -8,7 +8,7 @@ namespace  _2122_Senior_Project_06.Models
     /// The class that manages the login page.
     /// </summary>
     /// <remarks> Made by Hugo Mazariego. Last update 12/09/2021. </remarks>
-    public class LoginPage : INotifyPropertyChanged
+    public class LoginPage2 : INotifyPropertyChanged
     {
         #region Private Members
 
@@ -73,30 +73,9 @@ namespace  _2122_Senior_Project_06.Models
         /// Class constructor.
         /// </summary>
         /// <param name="accountDatabase">The account database interface to implement.</param>
-        public LoginPage(IAccountDatabase accountDatabase)
+        public LoginPage2(IAccountDatabase accountDatabase)
         {
             AccountDatabase = accountDatabase;
-        }
-
-        /// <summary>
-        /// Checks if provide password matches with provided username.
-        /// </summary>
-        /// <returns>If the passwords match.</returns>
-        public bool ValidatePassword()
-        {
-            bool passwordValid = false;
-            
-            if(Sys_Security.VerifySQL(Password) && Sys_Security.VerifySQL(Username))
-            {
-                string hashedValue = Sys_Security.SHA256_Hash(Password);
-                UserAccount userAccount = AccountDatabase.GetByUsername(Username);
-                if(userAccount.Password == hashedValue)
-                {
-                    passwordValid = true;
-                }
-            }
-
-            return passwordValid;
         }
 
         #endregion
