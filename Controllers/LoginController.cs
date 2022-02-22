@@ -22,15 +22,7 @@ namespace _2122_Senior_Project_06.Controllers
     {
         [HttpPost]
         public IActionResult AuthenticateUser([FromBody]LoginPage loginModel ){
-            if( (Sys_Security.VerifySQL(loginModel.username) || Sys_Security.VerifySQL(loginModel.password) == true) )
-            {
-                /* 
-                 * Return Error "Information entered is invalid"
-                 * if persists under a given user name, look for username and alert
-                 */ 
-                 
-            }
-            else if (Sys_Security.VerifyPass(loginModel.password, loginModel.username))
+            if (Sys_Security.VerifyPass(Sys_Security.Encoder(loginModel.password), Sys_Security.Encoder(loginModel.username)) )
             {
                 /*
                  * get userID from database and return it

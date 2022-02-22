@@ -1,6 +1,8 @@
 using System;
 using System.Text;
 using System.Security.Cryptography;
+using System.Web;
+using _2122_Senior_Project_06.SqlDatabase;
 
 namespace _2122_Senior_Project_06
 {
@@ -10,18 +12,6 @@ namespace _2122_Senior_Project_06
     /// <remarks>  Created by Andrew Bevilacqua. Last updated on 12/09/21.  </remarks>
     public class Sys_Security
     {
-        /// <summary>
-        /// Converts passed value into hashed SHA256 form.
-        /// </summary>
-        /// <param name="args">Value to hash.</param>
-        /// <returns>The hashed value.</returns>
-        private static string SHA256_Hash(string args)
-        {
-            SHA256Managed _sha256 = new SHA256Managed();
-            byte[] _cipherText = _sha256.ComputeHash(Encoding.Default.GetBytes(args));
-            return Convert.ToBase64String(_cipherText);
-        }
-
         /// <summary>
         /// Verify input is not a SQL injection attack.
         /// </summary>
@@ -57,6 +47,20 @@ namespace _2122_Senior_Project_06
         }
 
         /// <summary>
+        /// Encodes and Decodes text with Http text
+        /// </summary>
+        /// <param name="args">The value to code.</param>
+        /// <returns>cipherText or plainText</returns>
+        private static string Encode(string args)
+        {
+            return HttpUtility.UrlEncode(args);
+        }
+        private static string Decode(string args)
+        {
+            return HttpUtility.UrlDecode(args);
+        }
+
+        /// <summary>
         /// Verify if the provided password matches the stored password.
         /// </summary>
         /// <param name="Curr_pass">The password provided by the user.</param>
@@ -70,7 +74,7 @@ namespace _2122_Senior_Project_06
                }*/
 
             string Curr_hash = SHA256_Hash(curr);
-            string Stored_hash = null; //look up via username?
+            string Stored_hash = DatabaseAccess.Select("UserAccounts","Password", string.Format("UserName = {0}", username)); //look up via username?
             bool verify = false;
             //int entry_attempt = 0;
             if (Curr_hash == Stored_hash)
@@ -129,9 +133,6 @@ namespace _2122_Senior_Project_06
             {
                 return false;
             }
-
-            // current implementatin is subject to change. This is a rough implementations and does not account for special characters
-            // certain passwords conflict with VerifySQL() function
         }
 
         /*
@@ -149,6 +150,27 @@ namespace _2122_Senior_Project_06
         {
             return(NPassCheck(args));
         }
+        public static string Encoder(string args)
+        {
+            return Encode(args);
+        }
+        public static string Decoder(string args)
+        {
+            return Decode(args);
+        }
+
+        /// <summary>
+        /// Converts passed value into hashed SHA256 form.
+        /// </summary>
+        /// <param name="args">Value to hash.</param>
+        /// <returns>The hashed value.</returns>
+        public static string SHA256_Hash(string args)
+        {
+            SHA256Managed _sha256 = new SHA256Managed();
+            byte[] _cipherText = _sha256.ComputeHash(Encoding.Default.GetBytes(args));
+            return Convert.ToBase64String(_cipherText);
+        }
+
         public static int GenUID(int args)
         {
             /*

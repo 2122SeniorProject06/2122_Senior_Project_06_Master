@@ -21,18 +21,14 @@ namespace _2122_Senior_Project_06.Controllers
         [HttpPost]
         public IActionResult CreateNewUser([FromBody]NewAccPage UserModel)
         {
-            if( (Sys_Security.VerifySQL(UserModel.username) || Sys_Security.VerifySQL(UserModel.password)) ) //|| Sys_Security.VerifyEmail(UserModel.email) ) )
-            {
-                /* 
-                 * return error message "Information entered is invalid"
-                 */
-                return NotFound();               
-            }
             if(Sys_Security.VerifyNewPass(UserModel.password))
             {
-                // string mainTable = "UserHome";
-                // DatabaseAccess.CreateTable(mainTable, "user_ID int, username varchar(256), password varchar(64), email varchar(256)");
-                // DatabaseAccess.AddEntryToTable(mainTable, Sys_Security.GenUID(UserModel.user_ID), UserModel.username, UserModel.password, UserModel.email);
+                string Enc_Uname = Sys_Security.Encoder(UserModel.username);
+                string Enc_Pword = Sys_Security.SHA256_Hash(Sys_Security.Encoder(UserModel.password));
+                string Enc_Email = Sys_Security.Encoder(UserModel.email);
+                int UID = Sys_Security.GenUID(UserModel.user_ID);
+                return Ok();
+                // DatabaseAccess.AddEntryToTable("UserAccounts", UID, Enc_Uname, Enc_Pword, Enc_Email);
                 /*
                  * store new username and password
                  * generate, save and send a new UserID
@@ -41,6 +37,7 @@ namespace _2122_Senior_Project_06.Controllers
             }
             else
             {
+                return NotFound();
                 /* 
                    Return error message "Password does not meet password requirements.
                    Include password policy:
@@ -50,7 +47,6 @@ namespace _2122_Senior_Project_06.Controllers
                         - One number
                 */
             }
-            return Ok();
         }
     }
 }
