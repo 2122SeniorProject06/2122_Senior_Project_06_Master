@@ -54,14 +54,6 @@ namespace _2122_Senior_Project_06.Controllers
             return Ok();
         }
 
-        // GET
-        [HttpGet]
-        public List<JournalEntry> Get() 
-        {
-            // gets the list of journal entries
-            return new List<JournalEntry>();
-        }
-
         // DELETE
         [HttpDelete]
         public IActionResult Delete()

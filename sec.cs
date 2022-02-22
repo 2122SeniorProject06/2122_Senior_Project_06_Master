@@ -2,7 +2,9 @@ using System;
 using System.Text;
 using System.Security.Cryptography;
 using System.Web;
+using System.Collections.Generic;
 using _2122_Senior_Project_06.SqlDatabase;
+using _2122_Senior_Project_06.Exceptions;
 
 namespace _2122_Senior_Project_06
 {
@@ -66,7 +68,7 @@ namespace _2122_Senior_Project_06
         /// <param name="Curr_pass">The password provided by the user.</param>
         /// <param name="Stored_pass">The password retrieved by the database.</param>
         /// <returns>Whether the passwords match or not.</returns>
-        private static bool PassCheck(string curr, string username) // verifies inputted passwords matches stored
+        private static bool PassCheck(string curr, string email) // verifies inputted passwords matches stored
         {
             /*if(64_bit(Curr) == "64_bit of Admin name"
                {
@@ -74,7 +76,7 @@ namespace _2122_Senior_Project_06
                }*/
 
             string Curr_hash = SHA256_Hash(curr);
-            string Stored_hash = DatabaseAccess.Select("UserAccounts","Password", string.Format("UserName = {0}", username)); //look up via username?
+            string Stored_hash = GetPassFromUser(email); //look up via username?
             bool verify = false;
             //int entry_attempt = 0;
             if (Curr_hash == Stored_hash)
@@ -93,6 +95,21 @@ namespace _2122_Senior_Project_06
                 verify = false;
             }
             return verify;
+        }
+
+        private static string GetPassFromUser(string email)
+        {
+            string hashedPass = string.Empty;
+            List<object> allAccountsFound = DatabaseAccess.Select("UserAccounts","Password", string.Format("UserName = {0}", email));
+            if(allAccountsFound == null)
+            {
+                throw new IssueWithCredentialException();
+            }
+            foreach(List<string> accountInfo in allAccountsFound)
+            {
+                hashedPass = accountInfo[0];
+            }
+            return hashedPass;
         }
 
         /// <summary>
@@ -144,7 +161,19 @@ namespace _2122_Senior_Project_06
         }
         public static bool VerifyPass(string arg1, string arg2)
         {
-            return(PassCheck(arg1,arg2));
+            bool passCheckResult = false;
+            try
+            {
+                passCheckResult = PassCheck(arg1,arg2);
+            }
+            catch (IssueWithCredentialException)
+            {
+            }
+            catch (Exception e)
+            {
+                Console.Write(e.Message);
+            }
+            return passCheckResult;
         }
         public static bool VerifyNewPass(string args)
         {

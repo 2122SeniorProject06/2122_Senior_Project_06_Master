@@ -16,6 +16,19 @@ namespace _2122_Senior_Project_06.SqlDatabase
         {
             var encodedConnectionString = configuration.GetConnectionString("ShardDB");
             DatabaseConnection.ConfigureConnectionString(encodedConnectionString);
+            SetupAndCreateTables();
+        }
+
+        private static void SetupAndCreateTables()
+        {
+            string[] tableNames = {"UserAccounts"};
+            string[] tableValues = {"UserID varchar(8), UserName varchar(256), Password varchar(64), EMail varchar(256)"};
+            int index = 0;
+            foreach(var tableName in tableNames)
+            {
+                CreateTable(tableName, tableValues[index]);
+                index++;
+            }
         }
 
         /// <summary>
