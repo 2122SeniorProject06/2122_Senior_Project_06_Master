@@ -26,7 +26,7 @@ namespace _2122_Senior_Project_06.Controllers
         /// </summary>
         /// <param name="loginModel">The provided login credentials.</param>
         /// <returns>The account userID, or -1 if login failed.</returns>
-        [HttpPost]
+        [HttpGet]
         public int AuthenticateUser(string email, string password){
             int userID = -1;
             if(Sys_Security.VerifyPass(password, email))
