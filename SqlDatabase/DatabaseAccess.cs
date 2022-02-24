@@ -1,6 +1,6 @@
 using System;
 using Microsoft.Extensions.Configuration;
-using System.Collections.Generic;
+using System.Data;
 namespace _2122_Senior_Project_06.SqlDatabase
 {
     /// <summary>
@@ -19,6 +19,9 @@ namespace _2122_Senior_Project_06.SqlDatabase
             SetupAndCreateTables();
         }
 
+        /// <summary>
+        /// Ensures all necessary tables are set up in which ever database.
+        /// </summary>
         private static void SetupAndCreateTables()
         {
             string[] tableNames = {"UserAccounts"};
@@ -66,6 +69,12 @@ namespace _2122_Senior_Project_06.SqlDatabase
             
         }
 
+        /// <summary>
+        /// Updates an entry in a data table.
+        /// </summary>
+        /// <param name="tableName">The table to update.</param>
+        /// <param name="values">The value(s) to update.</param>
+        /// <param name="requirements">The required item(s) to update.</param>
         public static void UpdateEntryInTable(string tableName, string values, string requirements)
         {
             if(requirements == null)
@@ -76,6 +85,11 @@ namespace _2122_Senior_Project_06.SqlDatabase
             DatabaseConnection.SendRequest(request);
         }
 
+        /// <summary>
+        /// Removes an entry from a data table.
+        /// </summary>
+        /// <param name="tableName">The data table to remove from.</param>
+        /// <param name="requirements">The required item(s) to remove.</param>
         public static void DeleteEntryFromTable(string tableName, string requirements)
         {
             if(requirements == null)    
@@ -93,7 +107,7 @@ namespace _2122_Senior_Project_06.SqlDatabase
         /// <param name="itemsToSelect">The specific items to select.</param>
         /// <param name="requirements">The requirements for which entries to select from.</param>
         /// <returns>A list of selected items.</returns>
-        public static List<object> Select(string tableName, string itemsToSelect = null, string requirements = null)
+        public static DataTable Select(string tableName, string itemsToSelect = null, string requirements = null)
         {
             string requestTemplate = "SELECT {0} FROM {1}{2};";
             string items = itemsToSelect ?? "*";

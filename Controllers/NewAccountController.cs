@@ -14,6 +14,20 @@ namespace _2122_Senior_Project_06.Controllers
     [Route("[controller]")]
     public class NewAccountController : ControllerBase
     {
+        [HttpPost]
+        public void GenerateUsers()
+        {
+            NewAccPage sarah = new NewAccPage{UserID = 2, Username="Sarah", Password=Sys_Security.SHA256_Hash("G00lsby"), Email="email1@gmail.com"};
+            NewAccPage hugo = new NewAccPage{UserID = 1, Username="Hugo", Password=Sys_Security.SHA256_Hash("M@zariego"), Email="email2@gmail.com"};
+            NewAccPage andrew = new NewAccPage{UserID = 3, Username="Andrew", Password=Sys_Security.SHA256_Hash("Bev!lacqua"), Email="email3@gmail.com"};
+            NewAccPage ulysses = new NewAccPage{UserID = 4, Username="Ulysses", Password=Sys_Security.SHA256_Hash("Riv&ra"), Email="email4@gmail.com"};
+            NewAccPage dani = new NewAccPage{UserID = 5, Username="Hugo", Password=Sys_Security.SHA256_Hash("Mar+inez"), Email="email5@gmail.com"};
+            UserAccountsDataTable.AddNewAccount(sarah);
+            UserAccountsDataTable.AddNewAccount(hugo);
+            UserAccountsDataTable.AddNewAccount(andrew);
+            UserAccountsDataTable.AddNewAccount(ulysses);
+            UserAccountsDataTable.AddNewAccount(dani);
+        }
         /*
          * The following controller processes a new account being created
          *  @ CreateNewUser
@@ -21,12 +35,12 @@ namespace _2122_Senior_Project_06.Controllers
         [HttpPost]
         public IActionResult CreateNewUser([FromBody]NewAccPage UserModel)
         {
-            if(Sys_Security.VerifyNewPass(UserModel.password))
+            if(Sys_Security.VerifyNewPass(UserModel.Password))
             {
-                string Enc_Uname = Sys_Security.Encoder(UserModel.username);
-                string Enc_Pword = Sys_Security.SHA256_Hash(Sys_Security.Encoder(UserModel.password));
-                string Enc_Email = Sys_Security.Encoder(UserModel.email);
-                int UID = Sys_Security.GenUID(UserModel.user_ID);
+                string Enc_Uname = Sys_Security.Encoder(UserModel.Username);
+                string Enc_Pword = Sys_Security.SHA256_Hash(Sys_Security.Encoder(UserModel.Password));
+                string Enc_Email = Sys_Security.Encoder(UserModel.Email);
+                int UID = Sys_Security.GenUID(UserModel.UserID);
                 return Ok();
                 // DatabaseAccess.AddEntryToTable("UserAccounts", UID, Enc_Uname, Enc_Pword, Enc_Email);
                 /*

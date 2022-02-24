@@ -1,7 +1,7 @@
 
 using Microsoft.AspNetCore.Mvc;
 using System.Collections.Generic;
-using System;
+using System.Data;
 using System.Linq;
 using System.Threading.Tasks;
 using Microsoft.Extensions.Logging;
@@ -15,15 +15,15 @@ namespace _2122_Senior_Project_06.Controllers
     {
         
 
-        [HttpGet]
+        [HttpPost]
         public List<JournalEntry> Get() {
             string mainTable = "JournalEntries";
             List<JournalEntry> entries = new List<JournalEntry>();
             SetupTable(mainTable);
-            List<object> results = DatabaseAccess.Select(mainTable);
-            foreach(List<string> result in results)
+            DataTable results = DatabaseAccess.Select(mainTable);
+            foreach(DataRow result in results.Rows)
             {
-                JournalEntry entry = new JournalEntry(int.Parse(result[0]), result[1], result[2], int.Parse(result[3]));
+                JournalEntry entry = new JournalEntry((int) result[0], (string)result[1], (string)result[2], (int)result[3]);
                 entries.Add(entry);
             }
             return new List<JournalEntry>();

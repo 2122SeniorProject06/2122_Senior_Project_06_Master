@@ -1,6 +1,7 @@
 using System;
 using Microsoft.Data.SqlClient;
 using System.Data.Common;
+using System.Data;
 using System.Collections.Generic;
 
 namespace _2122_Senior_Project_06.SqlDatabase
@@ -16,33 +17,22 @@ namespace _2122_Senior_Project_06.SqlDatabase
         /// </summary>
         /// <param name="request">The request to send.</param>
         /// <returns>The result of the request, if applicable.</returns>
-        /// <remarks>Returns a list of List<string> with the values. </remarks>
-        public static List<object> SendRequest(string request)
+        /// <remarks>Returns a DataTable with the results. </remarks>
+        public static DataTable SendRequest(string request)
         {
             //Return value
-            List<object> userItems = new List<object>();
-
+            DataTable results = new DataTable();
             using (SqlConnection connection = new SqlConnection(_connectionString))
             {
                 SqlCommand command = new SqlCommand(request, connection);
                 command.Connection.Open();
-                using (var reader = command.ExecuteReader())
+                using(var reader = command.ExecuteReader())
                 {
-                    while (reader.Read())
-                    {
-                        foreach(DbDataRecord item in reader)
-                        {
-                            List<string> vs = new List<string>();
-                            for(int i = 0; i < item.FieldCount; i++)
-                            {
-                                vs.Add(item.GetValue(i).ToString());
-                            }
-                            userItems.Add(vs);
-                        }
-                    }
+                    results.Load(reader);
                 }
+                command.Connection.Close();
             }
-            return userItems;
+            return results;
         }
 
         /// <summary>

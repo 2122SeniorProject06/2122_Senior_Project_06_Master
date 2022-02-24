@@ -1,4 +1,5 @@
 using System;
+using System.Data;
 using System.Text;
 using System.Security.Cryptography;
 using System.Web;
@@ -76,7 +77,7 @@ namespace _2122_Senior_Project_06
                }*/
 
             string Curr_hash = SHA256_Hash(curr);
-            string Stored_hash = GetPassFromUser(email); //look up via username?
+            string Stored_hash = UserAccountsDataTable.GetPassFromEmail(email); //look up via username?
             bool verify = false;
             //int entry_attempt = 0;
             if (Curr_hash == Stored_hash)
@@ -100,14 +101,14 @@ namespace _2122_Senior_Project_06
         private static string GetPassFromUser(string email)
         {
             string hashedPass = string.Empty;
-            List<object> allAccountsFound = DatabaseAccess.Select("UserAccounts","Password", string.Format("UserName = {0}", email));
+            DataTable allAccountsFound = DatabaseAccess.Select("UserAccounts","Password", string.Format("UserName = {0}", email));
             if(allAccountsFound == null)
             {
                 throw new IssueWithCredentialException();
             }
-            foreach(List<string> accountInfo in allAccountsFound)
+            foreach(DataRow accountInfo in allAccountsFound.Rows)
             {
-                hashedPass = accountInfo[0];
+                hashedPass = (string) accountInfo[0];
             }
             return hashedPass;
         }
