@@ -98,21 +98,6 @@ namespace _2122_Senior_Project_06
             return verify;
         }
 
-        private static string GetPassFromUser(string email)
-        {
-            string hashedPass = string.Empty;
-            DataTable allAccountsFound = DatabaseAccess.Select("UserAccounts","Password", string.Format("UserName = {0}", email));
-            if(allAccountsFound == null)
-            {
-                throw new IssueWithCredentialException();
-            }
-            foreach(DataRow accountInfo in allAccountsFound.Rows)
-            {
-                hashedPass = (string) accountInfo[0];
-            }
-            return hashedPass;
-        }
-
         /// <summary>
         /// Checks username and password against registration policies.
         /// </summary>
