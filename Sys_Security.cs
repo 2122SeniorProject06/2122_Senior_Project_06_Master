@@ -156,16 +156,22 @@ namespace _2122_Senior_Project_06
         /*
          *      Public Functions
          */
+
+        //Public Functions for SQL verification, Takes in any string and returns if it contains possible SQL functions
         public static bool VerifySQL(string args)
         {
             return(SQLCheck(args));
         }
-        public static bool VerifyPass(string arg1, string arg2)
+
+        //Verifies current password matches that stored in database
+        //Curr_password is sent as plain text(gets hashed while in PassCheck)
+        //Both Curr_password and Curr_username are encoded(using the Encoder() function) before entering function(See LoginController.cs)
+        public static bool VerifyPass(string curr_password, string email)
         {
             bool passCheckResult = false;
             try
             {
-                passCheckResult = PassCheck(arg1,arg2);
+                passCheckResult = PassCheck(curr_password,email);
             }
             catch (IssueWithCredentialException)
             {
@@ -176,10 +182,14 @@ namespace _2122_Senior_Project_06
             }
             return passCheckResult;
         }
+
+        //Verifies Newpassword satifies password requirements
+        //Current implementation: NewPassword is sent as plaintext(Not encoded), returns a boolean if password satifies requirements
         public static bool VerifyNewPass(string args)
         {
             return(NPassCheck(args));
         }
+        
         public static string Encoder(string args)
         {
             return Encode(args);
