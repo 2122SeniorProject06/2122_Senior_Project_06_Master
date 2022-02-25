@@ -16,7 +16,8 @@ namespace _2122_Senior_Project_06.Controllers
         
 
         [HttpPost]
-        public List<JournalEntry> Get() {
+        public List<JournalEntry> Get(int userID)
+        {
             string mainTable = "JournalEntries";
             List<JournalEntry> entries = new List<JournalEntry>();
             SetupTable(mainTable);
@@ -47,6 +48,7 @@ namespace _2122_Senior_Project_06.Controllers
             return Ok();
         }
 
+        [HttpPut]
         // UPDATE
         public IActionResult Update()
         {
@@ -56,7 +58,7 @@ namespace _2122_Senior_Project_06.Controllers
 
         // DELETE
         [HttpDelete]
-        public IActionResult Delete()
+        public IActionResult Delete(int journalID)
         {
             return Ok();
         }

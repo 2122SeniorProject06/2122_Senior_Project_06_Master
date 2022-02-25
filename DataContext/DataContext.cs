@@ -4,6 +4,9 @@ using _2122_Senior_Project_06.Models;
 
 namespace _2122_Senior_Project_06.DataContext
 {
+    /// <summary>
+    /// Class to access database. Written by Sarah.
+    /// </summary>
     public class ShardContext : DbContext
     {
         public ShardContext(DbContextOptions<ShardContext> options)

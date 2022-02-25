@@ -6,7 +6,7 @@ namespace _2122_Senior_Project_06.SqlDatabase
     /// <summary>
     /// Runs database commands.
     /// </summary>
-    public class DatabaseAccess
+    internal class DatabaseAccess
     {
         /// <summary>
         /// Sets up the database for connection.

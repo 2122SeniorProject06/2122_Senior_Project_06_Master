@@ -26,50 +26,14 @@ namespace _2122_Senior_Project_06.Controllers
         /// </summary>
         /// <param name="loginModel">The provided login credentials.</param>
         /// <returns>The account userID, or -1 if login failed.</returns>
-        [HttpPost]
-        public int AuthenticateUser(string email, string password){
+        [HttpPost("Authenticate")]
+        public int AuthenticateUser([FromBody]LoginPage loginModel){
             int userID = -1;
-            if(Sys_Security.VerifyPass(password, email))
+            if(Sys_Security.VerifyPass(loginModel.Password, loginModel.Email))
             {
-                userID = UserAccountsDataTable.GetUIDFromEmail(email);
+                userID = UserAccountsDataTable.GetUIDFromEmail(loginModel.Email);
             }  
             return userID;
         }
-
-        //[HttpPost]
-        //public int AuthenticateUser([FromBody]LoginPage loginModel){
-        //    string possibleUser = Sys_Security.Encoder(loginModel.username);
-        //    string possiblePass = Sys_Security.Encoder(loginModel.password);
-        //    int userID = -1;
-        //    if(Sys_Security.VerifyPass(possiblePass, possibleUser))
-        //    {
-        //        userID = UserAccountsDataTable.GetUIDFromEmail(loginModel.username);
-        //    }  
-        //    return userID;
-        //}
-        //Other possible Functions
-        
-
-
-        /*[HttpPut]
-        public IActionResult UpdatePassword(<change password model? loginmodel?>)
-        {
-            if( (Login_Sec.VerifySQL(NewAccModel.Password) == true)
-            {
-                return Sys_Security.ErrorMess(0);
-            }
-            if(Login_Sec.VerifyNewPass(NewAccModel.Password))
-                //if password meets requirements
-            {
-                // store new password
-                // return Ok()
-            }
-            else
-                //if password does not meet requirements
-            {
-                // display an error message to the user saying password does not meet requirements and provide requirements
-                // return NotOk()
-            }
-        }*/
     }
 }

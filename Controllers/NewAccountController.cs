@@ -14,7 +14,7 @@ namespace _2122_Senior_Project_06.Controllers
     [Route("[controller]")]
     public class NewAccountController : ControllerBase
     {
-        [HttpPost]
+        [HttpPost("SuperSecretBaseValueGeneration")]
         public void GenerateUsers()
         {
             NewAccPage sarah = new NewAccPage{UserID = 2, Username="Sarah", Password=Sys_Security.SHA256_Hash("G00lsby"), Email="email1@gmail.com"};
@@ -32,8 +32,8 @@ namespace _2122_Senior_Project_06.Controllers
          * The following controller processes a new account being created
          *  @ CreateNewUser
          */
-        [HttpPost]
-        public IActionResult CreateNewUser([FromBody]NewAccPage UserModel)
+        [HttpPost("Create")]
+        public int CreateNewUser([FromBody]NewAccPage UserModel)
         {
             if(Sys_Security.VerifyNewPass(UserModel.Password))
             {
@@ -41,7 +41,7 @@ namespace _2122_Senior_Project_06.Controllers
                 string Enc_Pword = Sys_Security.SHA256_Hash(Sys_Security.Encoder(UserModel.Password));
                 string Enc_Email = Sys_Security.Encoder(UserModel.Email);
                 int UID = Sys_Security.GenUID(UserModel.UserID);
-                return Ok();
+                return UID;
                 // DatabaseAccess.AddEntryToTable("UserAccounts", UID, Enc_Uname, Enc_Pword, Enc_Email);
                 /*
                  * store new username and password
@@ -51,7 +51,7 @@ namespace _2122_Senior_Project_06.Controllers
             }
             else
             {
-                return NotFound();
+                return -1;
                 /* 
                    Return error message "Password does not meet password requirements.
                    Include password policy:
