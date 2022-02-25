@@ -39,39 +39,28 @@ namespace _2122_Senior_Project_06.Controllers
             {
                 if(Sys_Security.VerifyNewPass(potentialAccount.Password))
                 {
-                // Firstt check if email is being used\
-
-                    // if email is being used throw exeption
-                    // if email is not being used
-                        //verify password satisfies password req
-                        // gen a new UID
-                        // save info to database
-                        // return ok   
-                UserAccount newAccount = new UserAccount(potentialAccount.Username, Sys_Security.SHA256_Hash(potentialAccount.Password), potentialAccount.Email);
-                UserAccountsDataTable.AddNewAccount(newAccount);
-                return newAccount.UserID;
-                // DatabaseAccess.AddEntryToTable("UserAccounts", UID, Enc_Uname, Enc_Pword, Enc_Email);
-                /*
-                 * store new username and password
-                 * generate, save and send a new UserID
-                 * return Ok() and UserID
-                 */
+                    UserAccount newAccount = new UserAccount(potentialAccount.Username, Sys_Security.SHA256_Hash(potentialAccount.Password), potentialAccount.Email);
+                    UserAccountsDataTable.AddNewAccount(newAccount);
+                    return newAccount.UserID;
                 }
                 else
                 {
                     return -1;
+                    /* 
+                        Return error message "Password does not meet password requirements."
+                        Include password policy:
+                                - Minimum of 8 character
+                                - One upper case letter
+                                - One lower case letter
+                                - One number
+                    */
                 }
             }
             else
             {
                 return -1;
                 /* 
-                   Return error message "Password does not meet password requirements.
-                   Include password policy:
-                        - Minimum of 8 character
-                        - One upper case letter
-                        - One lower case letter
-                        - One number
+                   Return error message "Email is already in use."
                 */
             }
         }

@@ -69,7 +69,7 @@ namespace _2122_Senior_Project_06
         /// <param name="Curr_pass">The password provided by the user.</param>
         /// <param name="Stored_pass">The password retrieved by the database.</param>
         /// <returns>Whether the passwords match or not.</returns>
-        private static bool PassCheck(string curr, string email) // verifies inputted passwords matches stored
+        private static bool PassCheck(string curr, string email)
         {
             /*if(64_bit(Curr) == "64_bit of Admin name"
                {
@@ -77,17 +77,14 @@ namespace _2122_Senior_Project_06
                }*/
 
             string Curr_hash = SHA256_Hash(curr);
-            string Stored_hash = UserAccountsDataTable.GetPassFromEmail(email); //look up via username?
+            string Stored_hash = UserAccountsDataTable.GetPassFromEmail(email);
             //int entry_attempt = 0;
             if (Curr_hash == Stored_hash)
             {
-                return true; //cant i just say return true? take away the verify all together
-                // allow user's access to application(under their account)
-                //      Should return verify = true, prefrom extra operation?
+                return true;
             }
             else
             {
-                
                 //if(entry_attempt == 10)
                 //{
                     //lock account? send warning to email on file + lock account?
@@ -104,7 +101,8 @@ namespace _2122_Senior_Project_06
         private static bool NPassCheck(string args)
         {
             bool verify_length = false;
-            bool verify_chars = false; 
+            bool verify_charl= false;
+            bool verify_charL = false; 
             bool verify_num = false;
 
             if(args.Length >= 8 && args.Length <= 64)
@@ -112,21 +110,21 @@ namespace _2122_Senior_Project_06
                 verify_length = true;
                 foreach (char characters in args)
                 {
-                    if(characters.ToString() == char.ToUpper(characters).ToString() &&
-                        characters.ToString() == char.ToLower(characters).ToString())
+                    if((int)characters >= 97 && (int)characters <= 122)
                     {
-                        verify_chars = true;
+                        verify_charl = true;
                     }
-                }
-                foreach (char characters in args) // just move to first loop?
-                {
-                    if(char.IsDigit(characters))
+                    if ((int)characters >= 65 && (int)characters <= 90)
+                    {
+                        verify_charL = true;
+                    }
+                    if ((int)characters >= 48 && (int)characters <= 57)
                     {
                         verify_num = true;
                     }
                 }
             }
-            if(verify_length && verify_chars && verify_num)
+            if(verify_length && verify_charl && verify_charL && verify_num)
             {
                 return true;
             }
@@ -187,25 +185,38 @@ namespace _2122_Senior_Project_06
         /// </summary>
         /// <param name="args">Value to hash.</param>
         /// <returns>The hashed value.</returns>
-        public static string SHA256_Hash(string args)
+        public static string SHA256_Hash(string args) //Can turn to private
         {
             SHA256Managed _sha256 = new SHA256Managed();
             byte[] _cipherText = _sha256.ComputeHash(Encoding.Default.GetBytes(args));
             return Convert.ToBase64String(_cipherText);
         }
-
-        public static int GenUID(int args)
+    
+        public static string GenUID(string UID) // create second param(bool) if for journal or for
         {
-            // gen uid 8 bits with rnd capital letters and numbers
-            // will need to pass new UID to database to verify if its being usedd
-            // if not being used then we send back UID, if being used gen new UID
-            /*
-             * Read how many current users there are
-             * generate an 8 digit number corresponding to the number of users
-             */
-            // int curr_users = 0;
-            // 
-            return 0;
+            bool in_Use = false;
+            Random rnd = new Random();
+            while(in_Use)
+            {
+                UID = null;
+                for(int i = 0; i<=8;i++)
+                {
+                    int a = rnd.Next(0,36);
+                    char val;
+                    if(a < 26)
+                    {
+                        val = (char)(a + 65);
+                    }
+                    else
+                    {
+                        val = (char)(a +22);
+                    }
+                    UID += val;
+                }
+                in_Use = UserAccountsDataTable.UIDInUse(UID);
+            }
+            return UID;   
         }
+        
     }
 }
