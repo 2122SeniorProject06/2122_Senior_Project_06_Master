@@ -6,12 +6,38 @@ namespace  _2122_Senior_Project_06
     /// <remarks> Made by Hugo Mazariego. Last update 12/09/2021. </remarks>
     public class UserAccount
     {
-        public string UserID {get; set;}
-        
-        public string UserName {get; set;}
+        public int UserID { get; set; }
 
-        public string Email {get; set;}
+        public string Username { get; set; }
 
-        public string Password {get; set;}
+        public string Password { get; set; }
+
+        public string Email { get; set; }
+
+        public UserAccount()
+        {
+
+        }
+
+        public UserAccount(string username, string password, string email)
+        {
+            Username = username;
+            Password = password;
+            Email = email;
+            UserID = Sys_Security.GenUID(UserID);
+        }
+
+        /// <summary>
+        /// Returns values in a SQL value format.
+        /// </summary>
+        /// <returns>All values formatted into SQL.</returns>
+        public string ToSqlString()
+        {
+            return string.Format("{0}, '{1}', '{2}', '{3}'",
+                                 UserID,
+                                 Sys_Security.Encoder(Username),
+                                 Sys_Security.Encoder(Password), 
+                                 Sys_Security.Encoder(Email));
+        }
     }    
 }

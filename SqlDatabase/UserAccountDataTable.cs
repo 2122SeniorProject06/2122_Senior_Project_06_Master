@@ -45,10 +45,35 @@ namespace _2122_Senior_Project_06.SqlDatabase
         }
 
         /// <summary>
+        /// Checks if email is being used in the database.
+        /// </summary>
+        /// <param name="email">The email to look for.</param>
+        /// <returns>True if email is in the database.</returns>
+        public static bool EmailInUse(string email)
+        {
+            string encodedEmail = Sys_Security.Encoder(email);
+            string requirements = string.Format("{0} = '{1}'", UserAccountsItems.Email, encodedEmail);
+            object associatedAccounts = DecryptRequestList(tableName, UserAccountsItems.Email, requirements);
+            return associatedAccounts != null;
+        }
+
+        /// <summary>
+        /// Checks if UID is being used in the database.
+        /// </summary>
+        /// <param name="uid">The uid to look for.</param>
+        /// <returns>True if uid is in the database.</returns>
+        public static bool UIDInUse(int uid)
+        {
+            string requirements = string.Format("{0} = {1}", UserAccountsItems.User_ID, uid);
+            object associatedAccounts = DecryptRequestList(tableName, UserAccountsItems.User_ID, requirements);
+            return associatedAccounts != null;
+        }
+
+        /// <summary>
         /// Adds a new account to the database.
         /// </summary>
         /// <param name="newAccount">The new account.</param>
-        public static void AddNewAccount(NewAccPage newAccount)
+        public static void AddNewAccount(UserAccount newAccount)
         {
             DatabaseAccess.AddEntryToTable(tableName, newAccount.ToSqlString());
         }
@@ -93,9 +118,9 @@ namespace _2122_Senior_Project_06.SqlDatabase
         /// </summary>
         /// <param name="results">The list of strings to convert.</param>
         /// <returns>A new account variable.</returns>
-        private static NewAccPage ResultToAccount(DataRow results) 
+        private static UserAccount ResultToAccount(DataRow results) 
         {
-            NewAccPage account = new NewAccPage()
+            UserAccount account = new UserAccount()
             {
                 UserID = (int)results[0],
                 Username = (string) results[1],
