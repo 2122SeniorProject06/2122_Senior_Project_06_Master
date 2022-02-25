@@ -78,11 +78,10 @@ namespace _2122_Senior_Project_06
 
             string Curr_hash = SHA256_Hash(curr);
             string Stored_hash = UserAccountsDataTable.GetPassFromEmail(email); //look up via username?
-            bool verify = false;
             //int entry_attempt = 0;
             if (Curr_hash == Stored_hash)
             {
-                verify = true; //cant i just say return true? take away the verify all together
+                return true; //cant i just say return true? take away the verify all together
                 // allow user's access to application(under their account)
                 //      Should return verify = true, prefrom extra operation?
             }
@@ -93,9 +92,8 @@ namespace _2122_Senior_Project_06
                 //{
                     //lock account? send warning to email on file + lock account?
                 //}
-                verify = false;
+                return false;
             }
-            return verify;
         }
 
         /// <summary>
@@ -198,6 +196,9 @@ namespace _2122_Senior_Project_06
 
         public static int GenUID(int args)
         {
+            // gen uid 8 bits with rnd capital letters and numbers
+            // will need to pass new UID to database to verify if its being usedd
+            // if not being used then we send back UID, if being used gen new UID
             /*
              * Read how many current users there are
              * generate an 8 digit number corresponding to the number of users

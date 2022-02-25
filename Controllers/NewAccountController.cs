@@ -37,6 +37,13 @@ namespace _2122_Senior_Project_06.Controllers
         {
             if(Sys_Security.VerifyNewPass(UserModel.Password))
             {
+                // Firstt check if email is being used
+                    // if email is being used throw exeption
+                    // if email is not being used
+                        //verify password satisfies password req
+                        // gen a new UID
+                        // save info to database
+                        // return ok   
                 string Enc_Uname = Sys_Security.Encoder(UserModel.Username);
                 string Enc_Pword = Sys_Security.SHA256_Hash(Sys_Security.Encoder(UserModel.Password));
                 string Enc_Email = Sys_Security.Encoder(UserModel.Email);
