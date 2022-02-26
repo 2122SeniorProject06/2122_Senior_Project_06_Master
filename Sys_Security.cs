@@ -13,7 +13,7 @@ namespace _2122_Senior_Project_06
     /// Class in charge of system and cyber security.
     /// </summary>
     /// <remarks>  Created by Andrew Bevilacqua. Last updated on 12/09/21.  </remarks>
-    public class Sys_Security
+    internal class Sys_Security
     {
         /// <summary>
         /// Verify input is not a SQL injection attack.
