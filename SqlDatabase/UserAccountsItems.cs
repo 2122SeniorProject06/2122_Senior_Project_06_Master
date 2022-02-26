@@ -1,3 +1,5 @@
+namespace _2122_Senior_Project_06.SqlDatabase
+{
     internal class UserAccountsItems
     {
         public static string User_ID = "UserID";
@@ -5,3 +7,4 @@
         public static string Password = "Password";
         public static string Email = "EMail";
     }
+}

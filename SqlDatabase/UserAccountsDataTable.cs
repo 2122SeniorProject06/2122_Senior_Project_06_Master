@@ -1,6 +1,4 @@
 using System.Data;
-using System.Collections.Generic;
-using _2122_Senior_Project_06.Models;
 using _2122_Senior_Project_06.Exceptions;
 
 namespace _2122_Senior_Project_06.SqlDatabase
@@ -12,7 +10,6 @@ namespace _2122_Senior_Project_06.SqlDatabase
     public class UserAccountsDataTable
     {
         private static string tableName = "UserAccounts";
-
 
         /// <summary>
         /// Gets the account password based on the provided email.
@@ -36,11 +33,11 @@ namespace _2122_Senior_Project_06.SqlDatabase
         /// </summary>
         /// <param name="email">THe provided email.</param>
         /// <returns>The user ID.</returns>
-        public static int GetUIDFromEmail(string email)
+        public static string GetUIDFromEmail(string email)
         {
             string encodedEmail = Sys_Security.Encoder(email);
             string requirements = string.Format("{0} = '{1}'", UserAccountsItems.Email, encodedEmail);
-            int userID = (int) DecryptRequestList(tableName, UserAccountsItems.User_ID, requirements);
+            string userID = (string) DecryptRequestList(tableName, UserAccountsItems.User_ID, requirements);
             return userID;
         }
 
@@ -62,9 +59,9 @@ namespace _2122_Senior_Project_06.SqlDatabase
         /// </summary>
         /// <param name="uid">The uid to look for.</param>
         /// <returns>True if uid is in the database.</returns>
-        public static bool UIDInUse(int uid)
+        public static bool UIDInUse(string uid)
         {
-            string requirements = string.Format("{0} = {1}", UserAccountsItems.User_ID, uid);
+            string requirements = string.Format("{0} = '{1}'", UserAccountsItems.User_ID, uid);
             object associatedAccounts = DecryptRequestList(tableName, UserAccountsItems.User_ID, requirements);
             return associatedAccounts != null;
         }
@@ -99,14 +96,7 @@ namespace _2122_Senior_Project_06.SqlDatabase
                     else
                     {
                         desiredValues = accountInfo[0];
-                        if(itemsToSelect == "UserID")
-                        {
-                            desiredValues = int.Parse((string)desiredValues);
-                        }
-                        else
-                        {
-                            desiredValues = Sys_Security.Decoder((string) desiredValues);
-                        }
+                        desiredValues = Sys_Security.Decoder((string) desiredValues);
                     }
                 }
             }
@@ -122,7 +112,7 @@ namespace _2122_Senior_Project_06.SqlDatabase
         {
             UserAccount account = new UserAccount()
             {
-                UserID = (int)results[0],
+                UserID = (string) results[0],
                 Username = (string) results[1],
                 Password = (string) results[2],
                 Email = (string) results[3]

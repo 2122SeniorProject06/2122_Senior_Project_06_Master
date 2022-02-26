@@ -1,5 +1,6 @@
 using System;
 using Microsoft.Extensions.Configuration;
+using Microsoft.Data.SqlClient;
 using System.Data;
 namespace _2122_Senior_Project_06.SqlDatabase
 {
@@ -8,6 +9,56 @@ namespace _2122_Senior_Project_06.SqlDatabase
     /// </summary>
     internal class DatabaseAccess
     {
+        #region DatabaseConnection Class
+        /// <summary>
+        /// Class directly interacting with the database.
+        /// </summary>
+        /// <remarks>
+        /// Internal does not hide the class from other namespaces.
+        /// It hides the class from other assemblies i.e. other .csproj files.
+        /// The only way to hide the class is to make it a nested private class.
+        /// </remarks>
+        private class DatabaseConnection
+        {
+            private static string _connectionString;
+
+            /// <summary>
+            /// Sends a sql request to the database.
+            /// </summary>
+            /// <param name="request">The request to send.</param>
+            /// <returns>The result of the request, if applicable.</returns>
+            /// <remarks>Returns a DataTable with the results. </remarks>
+            public static DataTable SendRequest(string request)
+            {
+                //Return value
+                DataTable results = new DataTable();
+                using (SqlConnection connection = new SqlConnection(_connectionString))
+                {
+                    SqlCommand command = new SqlCommand(request, connection);
+                    command.Connection.Open();
+                    using(var reader = command.ExecuteReader())
+                    {
+                        results.Load(reader);
+                    }
+                    command.Connection.Close();
+                }
+                return results;
+            }
+
+            /// <summary>
+            /// Configures the connection string to use in the class.
+            /// </summary>
+            /// <param name="connectionString"></param>
+            public static void ConfigureConnectionString(string connectionString)
+            {
+                //Decrypts encoded connection string into bytes.
+                var decryptedBytes = System.Convert.FromBase64String(connectionString);
+                //Converts bytes into decoded connection  string.
+                _connectionString = System.Text.Encoding.UTF8.GetString(decryptedBytes);
+            }
+        }
+        #endregion
+
         /// <summary>
         /// Sets up the database for connection.
         /// </summary>
@@ -24,8 +75,19 @@ namespace _2122_Senior_Project_06.SqlDatabase
         /// </summary>
         private static void SetupAndCreateTables()
         {
-            string[] tableNames = {"UserAccounts"};
-            string[] tableValues = {"UserID varchar(8), UserName varchar(256), Password varchar(64), EMail varchar(256)"};
+            string userAccountValues = string.Format("{0} varchar(9), {1} varchar(256), {2} varchar(65), {3} varchar(256)",
+                                                        UserAccountsItems.User_ID,
+                                                        UserAccountsItems.Username,
+                                                        UserAccountsItems.Password,
+                                                        UserAccountsItems.Email);
+            string journalValues = string.Format("{0} varchar(9), {1} varchar(256), {2} varchar(256), {3} varchar(9), {4} DateTime",
+                                                        JournalsItems.JournalID,
+                                                        JournalsItems.Title,
+                                                        JournalsItems.Body,
+                                                        JournalsItems.UserID,
+                                                        JournalsItems.LastUpdated);
+            string[] tableNames = {"UserAccounts", "Journals"};
+            string[] tableValues = {userAccountValues, journalValues};
             int index = 0;
             foreach(var tableName in tableNames)
             {

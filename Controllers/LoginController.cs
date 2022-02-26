@@ -27,8 +27,8 @@ namespace _2122_Senior_Project_06.Controllers
         /// <param name="loginModel">The provided login credentials.</param>
         /// <returns>The account userID, or -1 if login failed.</returns>
         [HttpPost("Authenticate")]
-        public int AuthenticateUser([FromBody]LoginPage loginModel){
-            int userID = -1;
+        public string AuthenticateUser([FromBody]LoginPage loginModel){
+            string userID = null;
             if(Sys_Security.VerifyPass(loginModel.Password, loginModel.Email))
             {
                 userID = UserAccountsDataTable.GetUIDFromEmail(loginModel.Email);

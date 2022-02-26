@@ -194,7 +194,7 @@ namespace _2122_Senior_Project_06
     
         public static string GenUID(string UID) // create second param(bool) if for journal or for
         {
-            bool in_Use = false;
+            bool in_Use = true;
             Random rnd = new Random();
             while(in_Use)
             {
@@ -209,7 +209,7 @@ namespace _2122_Senior_Project_06
                     }
                     else
                     {
-                        val = (char)(a +22);
+                        val = (char)(a + 22);
                     }
                     UID += val;
                 }

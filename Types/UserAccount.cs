@@ -6,7 +6,7 @@ namespace  _2122_Senior_Project_06
     /// <remarks> Made by Hugo Mazariego. Last update 12/09/2021. </remarks>
     public class UserAccount
     {
-        public int UserID { get; set; }
+        public string UserID { get; set; }
 
         public string Username { get; set; }
 
@@ -19,7 +19,13 @@ namespace  _2122_Senior_Project_06
 
         }
 
-        public UserAccount(string username, string password, string email)
+        /// <summary>
+        /// Parameterized constructor for new account.
+        /// </summary>
+        /// <param name="username">The chosen username.</param>
+        /// <param name="email">The chosen email.</param>
+        /// <param name="password">The chosen password. Hash before sending.</param>
+        public UserAccount(string username, string email, string password)
         {
             Username = username;
             Password = password;
@@ -33,7 +39,7 @@ namespace  _2122_Senior_Project_06
         /// <returns>All values formatted into SQL.</returns>
         public string ToSqlString()
         {
-            return string.Format("{0}, '{1}', '{2}', '{3}'",
+            return string.Format("'{0}', '{1}', '{2}', '{3}'",
                                  UserID,
                                  Sys_Security.Encoder(Username),
                                  Sys_Security.Encoder(Password), 

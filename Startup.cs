@@ -33,10 +33,6 @@ namespace _2122_Senior_Project_06
            services.AddControllers();
            services.AddMvc();
            SqlDatabase.DatabaseAccess.SetupDatabase(Configuration);
-           //Connection String for Database
-            services.AddDbContext<ShardContext>(options => {
-                options.UseSqlServer(DecryptDBString());
-            });
         }
 
         private string DecryptDBString()
@@ -66,10 +62,6 @@ namespace _2122_Senior_Project_06
             {
                 endpoints.MapControllers();
             });
-            using (var serviceScope = app.ApplicationServices.GetService<IServiceScopeFactory>().CreateScope()) {
-                var context = serviceScope.ServiceProvider.GetRequiredService<ShardContext>();
-                context.Database.EnsureCreated();
-            }
         }
     }
 }

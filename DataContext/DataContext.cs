@@ -1,6 +1,6 @@
 using Microsoft.EntityFrameworkCore;
 using System.Diagnostics.CodeAnalysis;
-using _2122_Senior_Project_06.Models;
+using _2122_Senior_Project_06.Types;
 
 namespace _2122_Senior_Project_06.DataContext
 {

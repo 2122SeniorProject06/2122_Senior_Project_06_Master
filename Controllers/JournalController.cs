@@ -5,8 +5,9 @@ using System.Data;
 using System.Linq;
 using System.Threading.Tasks;
 using Microsoft.Extensions.Logging;
-using _2122_Senior_Project_06.Models;
+using _2122_Senior_Project_06.Types;
 using _2122_Senior_Project_06.SqlDatabase;
+using System;
 namespace _2122_Senior_Project_06.Controllers
 {
     [ApiController]
@@ -15,52 +16,66 @@ namespace _2122_Senior_Project_06.Controllers
     {
         
 
-        [HttpPost]
-        public List<JournalEntry> Get(int userID)
+        [HttpGet]
+        public List<JournalEntry> GetAll(string userID)
         {
-            string mainTable = "JournalEntries";
-            List<JournalEntry> entries = new List<JournalEntry>();
-            SetupTable(mainTable);
-            DataTable results = DatabaseAccess.Select(mainTable);
-            foreach(DataRow result in results.Rows)
-            {
-                JournalEntry entry = new JournalEntry((int) result[0], (string)result[1], (string)result[2], (int)result[3]);
-                entries.Add(entry);
-            }
-            return new List<JournalEntry>();
+            return JournalsDataTable.GetAllJournals(userID);
         }
 
-        private void SetupTable(string mainTable)
+        [HttpGet("GetJournal")]
+        public JournalEntry GetJournal(string journalID)
         {
-            DatabaseAccess.CreateTable(mainTable, "ID int, Title varchar(256), Body varchar(256), userID int");
-            //DatabaseAccess.AddEntryToTable(mainTable, "1, 'Starting My Journey', 'I''m an anxious mess, I hope this will help.', 8");
-            //DatabaseAccess.AddEntryToTable(mainTable, "2, 'Feeling Better Already', 'Might just be a placebo thing, but it feels like I'm improving.', 8");
-            //DatabaseAccess.AddEntryToTable(mainTable, "5, 'Dreams Are Lucid?', 'I''m not sure if it's coincidental, but I've been able to control my dreams since starting.', 8");
-            //DatabaseAccess.AddEntryToTable(mainTable, "10, 'Always Around...', 'I thought I was going crazy, but I swear I've seen flashes of something in the corner of my eye.', 8");
-            //DatabaseAccess.AddEntryToTable(mainTable, "66, 'No Escape', 'GetOutGetOutGetOutGetOutGetOutGetOutGetOutGetOutGetOutGetOut', 8");
+            return JournalsDataTable.GetJournalEntry(journalID);
         }
         
          // CREATE
         [HttpPost]
-        public IActionResult Create()
+        public IActionResult Create([FromBody] JournalEntry newEntry)
         {
-            var journalEntry = new JournalEntry();
-            return Ok();
+            try
+            {
+                newEntry.LastUpdated = DateTime.Now;
+                JournalsDataTable.AddNewEntry(newEntry);
+                return Ok();
+            }
+            catch(Exception e)
+            {
+                Console.WriteLine(e.Message);
+                return StatusCode(418);
+            }
         }
 
         [HttpPut]
         // UPDATE
-        public IActionResult Update()
+        public IActionResult Update(JournalEntry updatedEntry)
         {
-            
-            return Ok();
+            try
+            {
+                updatedEntry.LastUpdated = DateTime.Now;
+                JournalsDataTable.UpdateJournalEntry(updatedEntry);
+                return Ok();
+            }
+            catch(Exception e)
+            {
+                Console.WriteLine(e.Message);
+                return StatusCode(418);
+            }
         }
 
         // DELETE
         [HttpDelete]
-        public IActionResult Delete(int journalID)
+        public IActionResult Delete(string journalID)
         {
-            return Ok();
+            try
+            {
+                JournalsDataTable.DeleteEntry(journalID);
+                return Ok();
+            }
+            catch(Exception e)
+            {
+                Console.WriteLine(e.Message);
+                return StatusCode(418);
+            }
         }
     }
 }
