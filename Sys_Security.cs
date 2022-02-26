@@ -192,13 +192,13 @@ namespace _2122_Senior_Project_06
             return Convert.ToBase64String(_cipherText);
         }
     
-        public static string GenUID(string UID) // create second param(bool) if for journal or for
+        public static string GenID(string ID, bool type)
         {
             bool in_Use = true;
             Random rnd = new Random();
             while(in_Use)
             {
-                UID = null;
+                ID = null;
                 for(int i = 0; i<=8;i++)
                 {
                     int a = rnd.Next(0,36);
@@ -211,11 +211,18 @@ namespace _2122_Senior_Project_06
                     {
                         val = (char)(a + 22);
                     }
-                    UID += val;
+                    ID += val;
                 }
-                in_Use = UserAccountsDataTable.UIDInUse(UID);
+                if(type)
+                {
+                    in_Use = UserAccountsDataTable.UIDInUse(ID);
+                }
+                else
+                {
+                    in_Use = JournalsDataTable.JournalIDInUse(ID);
+                }
             }
-            return UID;   
+            return ID;   
         }
         
     }

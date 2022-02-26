@@ -30,7 +30,7 @@ namespace  _2122_Senior_Project_06
             Username = username;
             Password = password;
             Email = email;
-            UserID = Sys_Security.GenUID(UserID);
+            UserID = Sys_Security.GenID(UserID,true);
         }
 
         /// <summary>

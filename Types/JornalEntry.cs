@@ -30,7 +30,7 @@ namespace  _2122_Senior_Project_06.Types
         /// Reccomended to send DateTime.Now.</param>
         public JournalEntry(string title, string body, string userID, DateTime lastUpdated)
         {
-            JournalID = Sys_Security.GenUID(JournalID);
+            JournalID = Sys_Security.GenID(JournalID, false);
             Title = title;
             Body = body;
             UserID = userID;

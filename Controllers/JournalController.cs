@@ -19,21 +19,45 @@ namespace _2122_Senior_Project_06.Controllers
         [HttpGet]
         public List<JournalEntry> GetAll(string userID)
         {
-            return JournalsDataTable.GetAllJournals(userID);
+            if(UserAccountsDataTable.UIDInUse(userID))
+            {
+                return JournalsDataTable.GetAllJournals(userID);
+            }
+            else
+            {
+                //exception
+                //What if the user does not exist
+                //Possible for a person to input a Random ID through the http request sent by frontend
+                return null;
+            }
+            
         }
 
         [HttpGet("GetJournal")]
         public JournalEntry GetJournal(string journalID)
         {
-            return JournalsDataTable.GetJournalEntry(journalID);
+            if(JournalsDataTable.JournalIDInUse(journalID))
+            {
+                //Journal entry might not be decoded
+                return JournalsDataTable.GetJournalEntry(journalID);
+            }
+            else
+            {
+                //exception
+                //What if the journal does not exist
+                //Possible for a person to input a Random ID through the http request sent by frontend
+                return null;
+            }
         }
         
-         // CREATE
-        [HttpPost]
+        // CREATE
+        [HttpPost("Create")]
         public IActionResult Create([FromBody] JournalEntry newEntry)
         {
             try
             {
+                //Technically No JID is created
+                // following AddNewEntry -> check .ToSqlString in journalentry.cs
                 newEntry.LastUpdated = DateTime.Now;
                 JournalsDataTable.AddNewEntry(newEntry);
                 return Ok();
@@ -45,7 +69,7 @@ namespace _2122_Senior_Project_06.Controllers
             }
         }
 
-        [HttpPut]
+        [HttpPut("Update")]
         // UPDATE
         public IActionResult Update(JournalEntry updatedEntry)
         {
@@ -63,7 +87,7 @@ namespace _2122_Senior_Project_06.Controllers
         }
 
         // DELETE
-        [HttpDelete]
+        [HttpDelete("Delete")]
         public IActionResult Delete(string journalID)
         {
             try
