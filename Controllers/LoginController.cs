@@ -6,6 +6,7 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Threading.Tasks;
 using Microsoft.Extensions.Logging;
+using Microsoft.AspNetCore.Cors;
 using System.Data;
 using _2122_Senior_Project_06.SqlDatabase;
 
@@ -18,6 +19,7 @@ namespace _2122_Senior_Project_06.Controllers
      */
 
     [ApiController]
+    [EnableCors("AllowAll")]
     [Route("[controller]")]
     public class LoginController : ControllerBase
     {

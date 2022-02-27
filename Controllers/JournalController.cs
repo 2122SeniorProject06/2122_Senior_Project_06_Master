@@ -5,18 +5,19 @@ using System.Data;
 using System.Linq;
 using System.Threading.Tasks;
 using Microsoft.Extensions.Logging;
+using Microsoft.AspNetCore.Cors;
 using _2122_Senior_Project_06.Types;
 using _2122_Senior_Project_06.SqlDatabase;
 using System;
 namespace _2122_Senior_Project_06.Controllers
 {
     [ApiController]
+    [EnableCors("AllowAll")]
     [Route("[controller]")]
     public class JournalController: ControllerBase
     {
         
-
-        [HttpGet]
+        [HttpGet("GetAll")]
         public List<JournalEntry> GetAll(string userID)
         {
             if(UserAccountsDataTable.UIDInUse(userID))
@@ -25,9 +26,6 @@ namespace _2122_Senior_Project_06.Controllers
             }
             else
             {
-                //exception
-                //What if the user does not exist
-                //Possible for a person to input a Random ID through the http request sent by frontend
                 return null;
             }
             
@@ -38,27 +36,23 @@ namespace _2122_Senior_Project_06.Controllers
         {
             if(JournalsDataTable.JournalIDInUse(journalID))
             {
-                //Journal entry might not be decoded
                 return JournalsDataTable.GetJournalEntry(journalID);
             }
             else
             {
-                //exception
-                //What if the journal does not exist
-                //Possible for a person to input a Random ID through the http request sent by frontend
                 return null;
             }
         }
         
         // CREATE
         [HttpPost("Create")]
-        public IActionResult Create([FromBody] JournalEntry newEntry)
+        public IActionResult Create([FromBody] JournalEntry potentialJournal)
         {
             try
             {
-                //Technically No JID is created
-                // following AddNewEntry -> check .ToSqlString in journalentry.cs
-                newEntry.LastUpdated = DateTime.Now;
+                potentialJournal.LastUpdated = DateTime.Now;
+                JournalEntry newEntry = new JournalEntry(potentialJournal.Title, potentialJournal.Body, 
+                                                        potentialJournal.UserID, potentialJournal.LastUpdated);
                 JournalsDataTable.AddNewEntry(newEntry);
                 return Ok();
             }
@@ -69,8 +63,8 @@ namespace _2122_Senior_Project_06.Controllers
             }
         }
 
-        [HttpPut("Update")]
         // UPDATE
+        [HttpPut("Update")]
         public IActionResult Update(JournalEntry updatedEntry)
         {
             try
@@ -87,6 +81,7 @@ namespace _2122_Senior_Project_06.Controllers
         }
 
         // DELETE
+        
         [HttpDelete("Delete")]
         public IActionResult Delete(string journalID)
         {

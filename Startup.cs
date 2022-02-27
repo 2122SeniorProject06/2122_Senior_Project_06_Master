@@ -5,6 +5,7 @@ using System.Threading.Tasks;
 using Microsoft.AspNetCore.Builder;
 using Microsoft.AspNetCore.Hosting;
 using Microsoft.AspNetCore.HttpsPolicy;
+using Microsoft.AspNetCore.Cors;
 using Microsoft.AspNetCore.Mvc;
 using Microsoft.Extensions.Configuration;
 using Microsoft.Extensions.DependencyInjection;
@@ -30,6 +31,11 @@ namespace _2122_Senior_Project_06
         // This method gets called by the runtime. Use this method to add services to the container.
         public void ConfigureServices(IServiceCollection services)
         {
+            services.AddCors(options =>
+            {
+                options.AddPolicy("AllowAll",
+                    builder => builder.AllowAnyOrigin().AllowAnyMethod().AllowAnyHeader());
+            });
            services.AddControllers();
            services.AddMvc();
            SqlDatabase.DatabaseAccess.SetupDatabase(Configuration);
@@ -54,6 +60,7 @@ namespace _2122_Senior_Project_06
             //app.UseHttpsRedirection();
 
             app.UseRouting();
+            app.UseCors();
             app.UseAuthentication();
 
             app.UseAuthorization();

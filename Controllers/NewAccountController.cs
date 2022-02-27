@@ -1,6 +1,7 @@
 using Microsoft.AspNetCore.Http;
 using Microsoft.AspNetCore.Mvc;
 using Microsoft.Extensions.Logging;
+using Microsoft.AspNetCore.Cors;
 using System;
 using System.Collections.Generic;
 using System.Linq;
@@ -11,6 +12,7 @@ using _2122_Senior_Project_06.SqlDatabase;
 namespace _2122_Senior_Project_06.Controllers
 {
     [ApiController]
+    [EnableCors("AllowAll")]
     [Route("[controller]")]
     public class NewAccountController : ControllerBase
     {
