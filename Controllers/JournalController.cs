@@ -65,7 +65,7 @@ namespace _2122_Senior_Project_06.Controllers
 
         // UPDATE
         [HttpPut("Update")]
-        public IActionResult Update(JournalEntry updatedEntry)
+        public IActionResult Update([FromBody]JournalEntry updatedEntry)
         {
             try
             {
