@@ -47,7 +47,7 @@ namespace  _2122_Senior_Project_06.Types
             Title = Sys_Security.Decoder((string)result[1]);
             Body = Sys_Security.Decoder((string)result[2]);
             UserID = (string)result[3];
-            LastUpdated = Convert.ToDateTime((string)result[4]);
+            LastUpdated = (DateTime) result[4];
         }
 
         /// <summary>
@@ -56,7 +56,7 @@ namespace  _2122_Senior_Project_06.Types
         /// <returns>All values formatted into SQL.</returns>
         public string ToSqlString()
         {
-            string formattedLastUpdated = LastUpdated.ToString("YYYY-MM-DD HH:MM:SS");
+            string formattedLastUpdated = LastUpdated.ToString("yyyy-MM-dd HH:MM:ss");
             return string.Format("'{0}', '{1}', '{2}', '{3}', '{4}'",
                                  JournalID,
                                  Sys_Security.Encoder(Title),

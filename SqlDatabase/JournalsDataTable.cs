@@ -56,8 +56,8 @@ namespace _2122_Senior_Project_06.SqlDatabase
         public static bool JournalIDInUse(string journalID)
         {
             string requirements = string.Format("{0} = '{1}'", JournalsItems.JournalID, journalID);
-            object associatedAccounts = DecryptRequestList(tableName, JournalsItems.JournalID, requirements);
-            return associatedAccounts != null;
+            List<JournalEntry> associatedAccounts = DecryptRequestList(tableName, null, requirements);
+            return associatedAccounts.Count != 0;
         }
 
         /// <summary>
@@ -77,8 +77,11 @@ namespace _2122_Senior_Project_06.SqlDatabase
                 desiredValues = new List<JournalEntry>();
                 foreach(DataRow entryInfo in allEntriesFound.Rows)
                 {
-                    JournalEntry result = new JournalEntry(entryInfo); 
-                    desiredValues.Add(result);
+                    if(entryInfo.ItemArray.Length == 5)
+                    {
+                        JournalEntry result = new JournalEntry(entryInfo); 
+                        desiredValues.Add(result);
+                    }
                 }
             }
             return desiredValues;

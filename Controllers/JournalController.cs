@@ -31,6 +31,22 @@ namespace _2122_Senior_Project_06.Controllers
             
         }
 
+        [HttpPost("SuperSecretBaseValueGeneration")]
+        public void CreateJournals(string password)
+        {
+            if(password == "ReusingPasswordsIsAWorseIdeaThanGettingYourTwoMonthGirlfriendsNameTattooed")
+            {
+                string HugosID = UserAccountsDataTable.GetUIDFromEmail("email2@gmail.com");
+                string AndrewsID = UserAccountsDataTable.GetUIDFromEmail("email3@gmail.com");
+                for(int i = 0; i < 10; i++)
+                {
+                    string userID = i % 2 == 0 ? HugosID : AndrewsID;
+                    JournalEntry newEntry = new JournalEntry(string.Format("Journal #{0}", i), string.Format("{0} x 10 = {1}", i, i*10), userID, DateTime.Now);
+                    JournalsDataTable.AddNewEntry(newEntry);
+                }
+            }
+        }
+
         [HttpGet("GetJournal")]
         public JournalEntry GetJournal(string journalID)
         {
