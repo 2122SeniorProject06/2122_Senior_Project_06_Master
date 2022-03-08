@@ -111,7 +111,7 @@ namespace _2122_Senior_Project_06.SqlDatabase
             catch(Exception e)
             {
                 Console.WriteLine(e.Message);
-                if(e.Message != "There is already an object named '{0}' in the database.")
+                if(e.Message != string.Format("There is already an object named '{0}' in the database.", tableName))
                 {
                     Console.WriteLine(e.GetType());
                     Console.WriteLine(e.StackTrace);
