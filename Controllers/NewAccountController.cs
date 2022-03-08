@@ -46,7 +46,7 @@ namespace _2122_Senior_Project_06.Controllers
         [HttpPost("Create")]
         public IActionResult CreateNewUser([FromBody] NewAccountModel potentialAccount)
         {
-            if(UserAccountsDataTable.EmailInUse(potentialAccount.Email))
+            if(!UserAccountsDataTable.EmailInUse(potentialAccount.Email))
             {
                 if(Sys_Security.VerifyNewPass(potentialAccount.Password))
                 {
