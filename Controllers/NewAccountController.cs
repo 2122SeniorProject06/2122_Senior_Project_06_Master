@@ -44,7 +44,7 @@ namespace _2122_Senior_Project_06.Controllers
          *  @ CreateNewUser
          */
         [HttpPost("Create")]
-        public IActionResult CreateNewUser([FromBody] NewAccountModel potentialAccount)
+        public bool CreateNewUser([FromBody] NewAccountModel potentialAccount)
         {
             if(!UserAccountsDataTable.EmailInUse(potentialAccount.Email))
             {
@@ -54,11 +54,11 @@ namespace _2122_Senior_Project_06.Controllers
                 UserAccount newAccount = new UserAccount(potentialAccount.Username, potentialAccount.Email,
                                                          Sys_Security.SHA256_Hash(potentialAccount.Password));
                 UserAccountsDataTable.AddNewAccount(newAccount);
-                return Ok();
+                return true;
                 }
                 else
                 {
-                    return Forbid();
+                    return false;
                     /* 
                         Return error message "Password does not meet password requirements."
                         Include password policy:
@@ -71,7 +71,7 @@ namespace _2122_Senior_Project_06.Controllers
             }
             else
             {
-                return Forbid();
+                return false;
                 /* 
                    Return error message "Email is already in use."
                 */
