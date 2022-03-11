@@ -7,6 +7,7 @@ namespace _2122_Senior_Project_06.SqlDatabase
     /// <summary>
     /// Runs database commands.
     /// </summary>
+    /// <remarks> Paired programmed by Hugo and Andrew. </remarks>
     internal class DatabaseAccess
     {
         #region DatabaseConnection Class
@@ -18,6 +19,7 @@ namespace _2122_Senior_Project_06.SqlDatabase
         /// It hides the class from other assemblies i.e. other .csproj files.
         /// The only way to hide the class is to make it a nested private class.
         /// </remarks>
+        /// <remarks> Paired programmed by Hugo and Andrew. </remarks>
         private class DatabaseConnection
         {
             private static string _connectionString;

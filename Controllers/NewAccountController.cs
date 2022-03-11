@@ -11,6 +11,10 @@ using _2122_Senior_Project_06.SqlDatabase;
 
 namespace _2122_Senior_Project_06.Controllers
 {
+    /// <summary>
+    /// The API's account creation controller.
+    /// </summary>
+    ///  <remarks> Paired programmed by Andrew and Sarah. </remarks>
     [ApiController]
     [EnableCors("AllowAll")]
     [Route("[controller]")]

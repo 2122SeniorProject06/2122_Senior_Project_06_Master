@@ -11,6 +11,10 @@ using _2122_Senior_Project_06.SqlDatabase;
 using System;
 namespace _2122_Senior_Project_06.Controllers
 {
+    /// <summary>
+    /// The API's journal controller.
+    /// </summary>
+    ///  <remarks> Paired programmed by Andrew and Sarah. </remarks>
     [ApiController]
     [EnableCors("AllowAll")]
     [Route("[controller]")]

@@ -3,7 +3,7 @@ namespace  _2122_Senior_Project_06
     /// <summary>
     /// Class for User Account data type.
     /// </summary>
-    /// <remarks> Made by Hugo Mazariego. Last update 12/09/2021. </remarks>
+    /// <remarks> Paired programmed by Hugo, Andrew, and Sarah. </remarks>
     public class UserAccount
     {
         public string UserID { get; set; }

@@ -5,7 +5,7 @@ namespace  _2122_Senior_Project_06.Types
     /// <summary>
     /// The class that manages the login page.
     /// </summary>
-    /// <remarks> Made by Hugo Mazariego. Last update 12/09/2021. </remarks>
+    /// <remarks> Paired programmed by Hugo, Andrew, and Sarah. </remarks>
     public class JournalEntry 
     {
         public string JournalID {get; private set;}

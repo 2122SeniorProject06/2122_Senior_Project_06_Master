@@ -12,7 +12,7 @@ namespace _2122_Senior_Project_06
     /// <summary>
     /// Class in charge of system and cyber security.
     /// </summary>
-    /// <remarks>  Created by Andrew Bevilacqua. Last updated on 12/09/21.  </remarks>
+    /// <remarks> Created by Andrew Bevilacqua. </remarks>
     internal class Sys_Security
     {
         /// <summary>
