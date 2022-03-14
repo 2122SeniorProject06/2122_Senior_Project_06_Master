@@ -224,6 +224,31 @@ namespace _2122_Senior_Project_06
             }
             return ID;   
         }
+
+        public static bool VerifyEmail(string potentialEmail)
+        {
+            bool[] isValid = new bool[2];
+            foreach(char c in potentialEmail)
+            {
+                if((int)c == 64) //Check for @
+                {
+                    isValid[0] = true;
+                    
+                }
+                if ((int)c == 46) //Check for .
+                {
+                    isValid[1] = true;
+                }
+            }
+            if(isValid[0] && isValid[1])
+            {
+                return true;
+            }
+            else
+            {
+                return false;
+            }
+        }
         
     }
 }
