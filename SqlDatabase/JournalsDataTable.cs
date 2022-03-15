@@ -30,15 +30,15 @@ namespace _2122_Senior_Project_06.SqlDatabase
 
         public static void AddNewEntry(JournalEntry entry)
         {
-            DatabaseAccess.AddEntryToTable(tableName, entry.ToSqlString());
+            DatabaseAccess.AddEntryToTable(tableName, entry.ToSqlString(false));
         }
 
         public static void UpdateJournalEntry(JournalEntry updatedInfo)
         {
-            string requirements = string.Format("{0} = '{1}'", JournalsItems.JournalID, updatedInfo.UserID);
-            JournalEntry oldInfo = GetJournalEntry(updatedInfo.UserID);
+            string requirements = string.Format("{0} = '{1}'", JournalsItems.JournalID, updatedInfo.JournalID);
+            JournalEntry oldInfo = GetJournalEntry(updatedInfo.JournalID);
             oldInfo.UpdateInfo(updatedInfo);
-            DatabaseAccess.UpdateEntryInTable(tableName, oldInfo.ToSqlString(), requirements);
+            DatabaseAccess.UpdateEntryInTable(tableName, oldInfo.ToSqlString(true), requirements);
 
         }
 

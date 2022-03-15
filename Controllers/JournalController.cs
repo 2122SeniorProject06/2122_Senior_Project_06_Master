@@ -85,16 +85,16 @@ namespace _2122_Senior_Project_06.Controllers
         }
         
         // CREATE
-        [HttpPost("Create/{id}")]
-        public IActionResult Create(string id, [FromBody] JournalEntry potentialJournal)
+        [HttpPost("Create")]
+        public IActionResult Create([FromBody] JournalEntry potentialJournal)
         {
             
-            Console.WriteLine(string.Format("Test ID: {0}", id));
+            Console.WriteLine(string.Format("Test ID: {0}", potentialJournal.UserID));
             try
             {
                 potentialJournal.LastUpdated = DateTime.Now;
                 JournalEntry newEntry = new JournalEntry(potentialJournal.Title, potentialJournal.Body, 
-                                                        id, potentialJournal.LastUpdated);
+                                                        potentialJournal.UserID, potentialJournal.LastUpdated);
                 JournalsDataTable.AddNewEntry(newEntry);
                 return Ok();
             }

@@ -1,5 +1,6 @@
 using System.Data;
 using _2122_Senior_Project_06.Exceptions;
+using _2122_Senior_Project_06.Types;
 
 namespace _2122_Senior_Project_06.SqlDatabase
 {
