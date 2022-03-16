@@ -14,6 +14,11 @@ namespace _2122_Senior_Project_06.SqlDatabase
     {
         private static string tableName = "Journals";
 
+        /// <summary>
+        /// Gets all journals associated with an account.
+        /// </summary>
+        /// <param name="userID">The account the journals belongs to.</param>
+        /// <returns>A list of journals belonging to the user.</returns>
         public static List<JournalEntry> GetAllJournals(string userID)
         {
             string requirements = string.Format("{0} = '{1}'", JournalsItems.UserID, userID);
@@ -21,6 +26,11 @@ namespace _2122_Senior_Project_06.SqlDatabase
             return results;
         }
 
+        /// <summary>
+        /// Gets the journal associated with the id.
+        /// </summary>
+        /// <param name="journalID">The journal id to find.</param>
+        /// <returns>All the journal's contents.</returns>
         public static JournalEntry GetJournalEntry(string journalID)
         {
             string requirements = string.Format("{0} = '{1}'", JournalsItems.JournalID, journalID);
@@ -28,11 +38,19 @@ namespace _2122_Senior_Project_06.SqlDatabase
             return results[0];
         }
 
+        /// <summary>
+        /// Adds a new data entry to the database.
+        /// </summary>
+        /// <param name="entry">The journal entry to add.</param>
         public static void AddNewEntry(JournalEntry entry)
         {
             DatabaseAccess.AddEntryToTable(tableName, entry.ToSqlString(false));
         }
 
+        /// <summary>
+        /// Updates a journal entry in the database with provided information.
+        /// </summary>
+        /// <param name="updatedInfo">The updated journal entry values.</param>
         public static void UpdateJournalEntry(JournalEntry updatedInfo)
         {
             string requirements = string.Format("{0} = '{1}'", JournalsItems.JournalID, updatedInfo.JournalID);
@@ -42,6 +60,10 @@ namespace _2122_Senior_Project_06.SqlDatabase
 
         }
 
+        /// <summary>
+        /// Deletes a journal entry from the table.
+        /// </summary>
+        /// <param name="journalID">The journal entry id to delete.</param>
         public static void DeleteEntry(string journalID)
         {
             string requirements = string.Format("{0} = '{1}'", JournalsItems.JournalID, journalID);

@@ -74,11 +74,10 @@ namespace  _2122_Senior_Project_06.Types
             }
             else
             {
-                values[0] =  string.Format("'{0}'", values[0]);
-                values[1] =  string.Format("'{0}'", values[1]);
-                values[2] =  string.Format("'{0}'", values[2]);
-                values[3] =  string.Format("'{0}'", values[3]);
-                values[4] =  string.Format("'{0}'", values[4]);
+                for(int i = 0; i < values.Length; i++)
+                {
+                    values[i] =  string.Format("'{0}'", values[i]);
+                }
             }
             
             return string.Format("{0}, {1}, {2}, {3}, {4}",

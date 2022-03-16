@@ -8,6 +8,7 @@ using System.Linq;
 using System.Threading.Tasks;
 using _2122_Senior_Project_06.Models;
 using _2122_Senior_Project_06.SqlDatabase;
+using _2122_Senior_Project_06.Types;
 
 namespace _2122_Senior_Project_06.Controllers
 {
