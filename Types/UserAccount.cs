@@ -1,4 +1,4 @@
-namespace  _2122_Senior_Project_06
+namespace  _2122_Senior_Project_06.Types
 {
     /// <summary>
     /// Class for User Account data type.
@@ -37,13 +37,43 @@ namespace  _2122_Senior_Project_06
         /// Returns values in a SQL value format.
         /// </summary>
         /// <returns>All values formatted into SQL.</returns>
-        public string ToSqlString()
+        public string ToSqlString(bool isUpdate)
         {
-            return string.Format("'{0}', '{1}', '{2}', '{3}'",
-                                 UserID,
-                                 Sys_Security.Encoder(Username),
-                                 Sys_Security.Encoder(Password), 
-                                 Sys_Security.Encoder(Email));
+            string[] values = { UserID,
+                                Sys_Security.Encoder(Username),
+                                Sys_Security.Encoder(Password), 
+                                Sys_Security.Encoder(Email)};
+
+            if(isUpdate)
+            {
+                values[0] =  string.Format("{0} = '{1}'", UserAccountsItems.User_ID, values[0]);
+                values[1] =  string.Format("{0} = '{1}'", UserAccountsItems.Username, values[1]);
+                values[2] =  string.Format("{0} = '{1}'", UserAccountsItems.Password, values[2]);
+                values[3] =  string.Format("{0} = '{1}'", UserAccountsItems.Email, values[3]);
+            }
+            else
+            {
+                for(int i = 0; i < values.Length; i++)
+                {
+                    values[i] =  string.Format("'{0}'", values[i]);
+                }
+            }
+            return string.Format("{0}, {1}, {2}, {3}",
+                                 values[0],
+                                 values[1],
+                                 values[2],
+                                 values[3]);
+        }
+
+        /// <summary>
+        /// Updates the data of the user account.
+        /// </summary>
+        /// <param name="newInfo">The updated information.</param>
+        public void UpdateInfo(UserAccount newInfo)
+        {
+            Username = newInfo.Username ?? Username;
+            Password = newInfo.Password ?? Password;
+            Email = newInfo.Email ?? Email;
         }
     }    
 }
