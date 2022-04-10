@@ -107,21 +107,21 @@ namespace _2122_Senior_Project_06
 
             if(args.Length >= 8 && args.Length <= 64)
             {
-                verify_length = true;
-                foreach (char characters in args)
+                isValid[0] = true;
+            }
+            foreach (char characters in args)
+            {
+                if((int)characters >= 97 && (int)characters <= 122)
                 {
-                    if((int)characters >= 97 && (int)characters <= 122)
-                    {
-                        verify_charl = true;
-                    }
-                    if ((int)characters >= 65 && (int)characters <= 90)
-                    {
-                        verify_charL = true;
-                    }
-                    if ((int)characters >= 48 && (int)characters <= 57)
-                    {
-                        verify_num = true;
-                    }
+                    isValid[1] = true;
+                }
+                if ((int)characters >= 65 && (int)characters <= 90)
+                {
+                    isValid[2] = true;
+                }
+                if ((int)characters >= 48 && (int)characters <= 57)
+                {
+                    isValid[3] = true;
                 }
             }
             if(verify_length && verify_charl && verify_charL && verify_num)
@@ -130,7 +130,19 @@ namespace _2122_Senior_Project_06
             }
             else
             {
-                return false;
+                string[] errorTypes = {"- The password must be at least more than 8 lengths.",
+                                       "- The password must contain at least one lowercase character.",
+                                       "- The password must contain at least one capital character.",
+                                       "- The password must contain at least one number." };
+                string message = "";
+                for(int i = 0; i < isValid.Length; i++)
+                {
+                    if(!isValid[i])
+                    {
+                        message += '\n' + errorTypes[i];
+                    }
+                }
+                throw new IssueWithCredentialException(message.Remove(0,1));
             }
         }
 
