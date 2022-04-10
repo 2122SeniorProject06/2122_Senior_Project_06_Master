@@ -8,6 +8,7 @@ using System.Threading.Tasks;
 using Microsoft.Extensions.Logging;
 using Microsoft.AspNetCore.Cors;
 using System.Data;
+using _2122_Senior_Project_06.Types;
 using _2122_Senior_Project_06.SqlDatabase;
 
 namespace _2122_Senior_Project_06.Controllers
@@ -34,14 +35,14 @@ namespace _2122_Senior_Project_06.Controllers
         /// <param name="userID">UserID obtained through login</param>
         /// <returns>User's info from database</returns>
         [HttpGet("GetAllInfo")]
-        public List<string> GetUserInfo(string userID)
+        public UserAccount GetUserInfo(string userID)
         {
             if(Sys_Security.VerifySQL(userID))
             {
                 if(UserAccountsDataTable.UIDInUse(userID))
                 {
-                    //return user's email, username, current badges
-                    return null;
+                    
+                    return UserAccountsDataTable.GetAccount(userID);
                 }
                 else
                 {
@@ -55,15 +56,29 @@ namespace _2122_Senior_Project_06.Controllers
         }
 
         /// <summary>
-        /// Changes a users password while they are in their account settings
-        /// User will have to type in current password in order to verify that they are allowed to change the password
-        /// also we need to know what the password is(in the database it is hashed and cannot be read)
+        /// Updates users info no matter type of data
         /// </summary>
-        /// <param name=""></param>
-        /// <returns>OK() if change as successful, or error code if not?</returns>
-        [HttpPut("UpdatePass")]
-        public IActionResult ChangePassword(string curr_pass, string new_pass)// might need to be changed to a from body
+        /// <param name="UserAccount">UserAccount is obtained dependent on what the user would like to update</param>
+        /// <returns>IActionResult, Ok() if successful, Forbid() if invalid/user DNE</returns>
+        [HttpPut("UpdateUser")]
+        public IActionResult UpdateUser([FromBody]UserAccount updatedUser) //might need to send UID seperate
         {
+            if(Sys_Security.VerifySQL(updatedUser.UserID))
+            {
+                if(UserAccountsDataTable.UIDInUse(updatedUser.UserID))
+                {
+                    UserAccountsDataTable.UpdateUserAccount(updatedUser);
+                    return Ok();
+                }
+                else
+                {
+                    return Forbid();
+                }
+            }
+            else
+            {
+                return Forbid();
+            }
             /*
                 Should we verify password first?
                         Password stored in database is hashed so we cant tell what it is from our end
@@ -71,7 +86,6 @@ namespace _2122_Senior_Project_06.Controllers
                     Make sure new password satifies password policy
                         Change password in database
             */
-            return Ok();
         }
 
         /// <summary>
@@ -109,6 +123,9 @@ namespace _2122_Senior_Project_06.Controllers
             */
             return Ok();
         }
+        /*
+            get badges function?
+        */
 
     }
 }

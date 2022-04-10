@@ -9,6 +9,7 @@ using System.Threading.Tasks;
 using _2122_Senior_Project_06.Models;
 using _2122_Senior_Project_06.SqlDatabase;
 using _2122_Senior_Project_06.Types;
+using _2122_Senior_Project_06.Exceptions;
 
 namespace _2122_Senior_Project_06.Controllers
 {
@@ -21,67 +22,32 @@ namespace _2122_Senior_Project_06.Controllers
     [Route("[controller]")]
     public class NewAccountController : ControllerBase
     {
-        [HttpPost("SuperSecretBaseValueGeneration")]
-        public string GenerateUsers(string password)
-        {
-            if(password == "TheKeyToSecrecyIsLength")
-            {
-                UserAccount sarah = new UserAccount("Sarah", "email1@gmail.com", Sys_Security.SHA256_Hash("G00lsby"));
-                UserAccount hugo = new UserAccount ("Hugo", "email2@gmail.com", Sys_Security.SHA256_Hash("M@zariego"));
-                UserAccount andrew = new UserAccount ("Andrew", "email3@gmail.com", Sys_Security.SHA256_Hash("Bev!lacqua"));
-                UserAccount ulysses = new UserAccount ("Ulysses", "email4@gmail.com", Sys_Security.SHA256_Hash("Riv&ra"));
-                UserAccount dani = new UserAccount ("Dani", "email5@gmail.com", Sys_Security.SHA256_Hash("Mar+inez"));
-                UserAccountsDataTable.AddNewAccount(sarah);
-                UserAccountsDataTable.AddNewAccount(hugo);
-                UserAccountsDataTable.AddNewAccount(andrew);
-                UserAccountsDataTable.AddNewAccount(ulysses);
-                UserAccountsDataTable.AddNewAccount(dani);
-                return "MissionComplete";
-            }
-
-            else if(password == "SuperSecretBaseValueGenerationPassword")
-                return "You are so stupid. Did you really think that we would just give you the password?";
-
-            else return "Incorrect Password. The correct password is \"SuperSecretBaseValueGenerationPassword\".";
-        }
         /*
          * The following controller processes a new account being created
          *  @ CreateNewUser
          */
         [HttpPost("Create")]
-        public bool CreateNewUser([FromBody] NewAccountModel potentialAccount)
+        public NewAccountModel CreateNewUser([FromBody] NewAccountModel potentialAccount)
         {
-            if(Sys_Security.VerifyEmail(potentialAccount.Email))
+            potentialAccount.VerificationErrors = new string[4];
+            potentialAccount.VerificationResults = new bool[4];
+            string[] errorTypes = {"Email is invalid.",
+                                    "Username is invalid.",
+                                    "Password is invalid.",
+                                    "Passwords do not match."};
+            
+            // {"The password must be at least more than 8 lengths.",
+            //  "The password must contain at least one lowercase character.",
+            //  "The password must contain at least one capital character.",
+            //  "The password must contain at least one number." };
+            try
             {
-                if(!UserAccountsDataTable.EmailInUse(potentialAccount.Email))
+                if(Sys_Security.VerifyEmail(potentialAccount.Email))//if email is an email and if email is not already in use
                 {
-                    if(Sys_Security.VerifyNewPass(potentialAccount.Password))
-                    {
+                    if(!UserAccountsDataTable.EmailInUse(potentialAccount.Email))
+                        potentialAccount.VerificationResults[0] = true;
 
-                    UserAccount newAccount = new UserAccount(potentialAccount.Username, potentialAccount.Email,
-                                                            Sys_Security.SHA256_Hash(potentialAccount.Password));
-                    UserAccountsDataTable.AddNewAccount(newAccount);
-                    return true;
-                    }
-                    else
-                    {
-                        return false;
-                        /* 
-                            Return error message "Password does not meet password requirements."
-                            Include password policy:
-                                    - Minimum of 8 character
-                                    - One upper case letter
-                                    - One lower case letter
-                                    - One number
-                        */
-                    }
-                }
-                else
-                {
-                    return false;
-                    /* 
-                    Return error message "Email is already in use."
-                    */
+                    else throw new IssueWithCredentialException("Email already in use.");
                 }
             }
             catch(IssueWithCredentialException e)
@@ -182,10 +148,8 @@ namespace _2122_Senior_Project_06.Controllers
             else
             {
                 return false;
-                /*
-                Return error message "Email is not valid"
-                */
             }
+
         }
     }
 }

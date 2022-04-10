@@ -100,10 +100,13 @@ namespace _2122_Senior_Project_06
         /// <returns>If the password matches the registration policies.</returns>
         private static bool NPassCheck(string args)
         {
-            bool verify_length = false;
-            bool verify_charl= false;
-            bool verify_charL = false; 
-            bool verify_num = false;
+            bool[] isValid = new bool[4];
+            /*
+                [0]:between character requirements
+                [1]:has lowercase letter
+                [2]:has capital letter
+                [3]:has number
+            */
 
             if(args.Length >= 8 && args.Length <= 64)
             {
@@ -124,7 +127,7 @@ namespace _2122_Senior_Project_06
                     isValid[3] = true;
                 }
             }
-            if(verify_length && verify_charl && verify_charL && verify_num)
+            if(isValid[0] && isValid[1] && isValid[2] && isValid[3])
             {
                 return true;
             }
@@ -167,17 +170,11 @@ namespace _2122_Senior_Project_06
         public static bool VerifyPass(string curr_password, string email)
         {
             bool passCheckResult = false;
-            try
+            if(VerifyEmail(email) && UserAccountsDataTable.EmailInUse(email))
             {
-                passCheckResult = PassCheck(curr_password,email);
+                    passCheckResult = PassCheck(curr_password,email);
             }
-            catch (IssueWithCredentialException)
-            {
-            }
-            catch (Exception e)
-            {
-                Console.Write(e.Message);
-            }
+            
             return passCheckResult;
         }
 
@@ -263,7 +260,7 @@ namespace _2122_Senior_Project_06
             }
             else
             {
-                return false;
+                throw new IssueWithCredentialException("Not a valid email.");
             }
         }
         
