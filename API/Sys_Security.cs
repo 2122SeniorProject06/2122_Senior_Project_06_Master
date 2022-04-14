@@ -6,6 +6,7 @@ using System.Web;
 using System.Collections.Generic;
 using _2122_Senior_Project_06.SqlDatabase;
 using _2122_Senior_Project_06.Exceptions;
+using System.Text.RegularExpressions;
 
 namespace _2122_Senior_Project_06
 {
@@ -133,19 +134,20 @@ namespace _2122_Senior_Project_06
             }
             else
             {
-                string[] errorTypes = {"- The password must be at least more than 8 lengths.",
-                                       "- The password must contain at least one lowercase character.",
-                                       "- The password must contain at least one capital character.",
-                                       "- The password must contain at least one number." };
-                string message = "";
+                string[] errorTypes = {"be at least 8 characters",
+                                       "contain a lowercase letter",
+                                       "contain a capital letter",
+                                       "contain a number" };
+                string message = "The password must: ";
                 for(int i = 0; i < isValid.Length; i++)
                 {
                     if(!isValid[i])
                     {
-                        message += '\n' + errorTypes[i];
+                        message += errorTypes[i] + ", ";
                     }
                 }
-                throw new IssueWithCredentialException(message.Remove(0,1));
+                message = Regex.Replace(message, ", $", ".");
+                throw new IssueWithCredentialException(message);
             }
         }
 
