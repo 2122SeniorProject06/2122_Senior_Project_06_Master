@@ -16,28 +16,24 @@ namespace _2122_Senior_Project_06.Controllers
     [Route("[controller]")]
     public class CountingGameController : ControllerBase
     {
-        [HttpGet("GetVal")]
-        public int GenerateValue(CountingGame gameInfo)
+        [HttpGet("GetCountVal")]
+        public int GenerateCountValue(int countingValue)
         {
-            return GenCountingVal(gameInfo.startingValue);
+            return GenCountingVal();
         }
 
-        private static int GenCountingVal(int str_val)
+        private static int GenCountingVal()
         {
-            Random rnd = new Random();
-            
-            if (str_val <= 100)
-            {
-                int counting_val = rnd.Next(2, 15);
-                return counting_val;
-            }
-            else if(str_val > 100 && str_val <=200)
-            {
-                int counting_val = rnd.Next(15, 35);
-                return counting_val;
-            }
-            return 7;
+            var random = new Random();
+
+            var list = new List<int>{ 3,5,15,20,30};
+
+            int index = random.Next(list.Count);
+
+            int couting_val = (list[index]);
+
+            return couting_val;
 
         }
-    }
+    }   
 }
