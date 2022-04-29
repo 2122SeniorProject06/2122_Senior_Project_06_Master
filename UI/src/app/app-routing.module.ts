@@ -42,7 +42,8 @@ const routes: Routes = [
   { path: 'loading-animation', component: LoadingAnimationComponent },
   { path: 'about', component: AboutComponent},
   { path: 'account', component: AccountComponent },
-  { path: 'settings', component: SettingComponent}
+  { path: 'settings', component: SettingComponent },
+  { path: '**', component: MainMenuComponent }, 
 ];
 
 @NgModule({
