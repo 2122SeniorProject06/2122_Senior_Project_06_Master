@@ -17,12 +17,14 @@ import { AppComponent } from 'src/app/app.component';
   providers: [UserLogin, UserModel]
 })
 export class UserLoginComponent implements OnInit {
+ 
  loginModel: any;
  form: any;
  data: any;
  token?: string;
  error: any;
  currUser: any;
+ awaitingAPI: boolean;
  showLoading: boolean; // Shows the loading bar.
  targetEvent: HTMLElement; // The actual target to load.
  bgImage: HTMLElement | null = document.createElement('br');
@@ -36,6 +38,11 @@ export class UserLoginComponent implements OnInit {
     private location: Location,
     private backgroundChange: AppComponent,
     ) {
+      if(localStorage.getItem('userId') != null)
+      {
+        this.router.navigateByUrl('/main-menu');
+      }
+      this.awaitingAPI = false;
       this.showLoading = false;
       this.targetEvent = document.createElement('br');
     }
@@ -67,6 +74,9 @@ export class UserLoginComponent implements OnInit {
     const login = new UserLogin();
     login.Email = this.form.get('Email').value;
     login.Password = this.form.get('Password').value;
+    this.form.controls['Email'].disable();
+    this.form.controls['Password'].disable();
+    this.awaitingAPI = true;
     this.UserService.login(login).subscribe((result) => {
       this.data = result;
       let parsed = JSON.parse(this.data);
@@ -78,6 +88,9 @@ export class UserLoginComponent implements OnInit {
       localStorage.removeItem('DarkMode');
       localStorage.removeItem('Background');
       console.log(localStorage.getItem('userId'));
+      this.awaitingAPI = false;
+      this.form.controls['Email'].enable();
+      this.form.controls['Password'].enable();
       if (this.data){
         this.currUser = "";
         this.currUser = this.data;

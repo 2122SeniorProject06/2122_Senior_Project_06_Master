@@ -11,7 +11,7 @@
   <mat-card class="card">
     <div *ngIf="!showLoading">
       <mat-card-title>Log In</mat-card-title>
-      <mat-card-content>
+      <mat-card-content class="content">
         <form [formGroup]="form" (ngSubmit)="onSubmit()">
           <p>
             <mat-form-field>
@@ -23,10 +23,12 @@
               <input type="password" matInput placeholder="Password" formControlName="Password"required>
             </mat-form-field>
           </p>
-
-          <button class="login" mat-raised-button>Log In</button>
-          <button class="register" (click)="goToRegistration()" mat-raised-button>Create Account</button>
+          <div *ngIf="!awaitingAPI">
+            <button class="login" [disabled]="awaitingAPI" mat-raised-button>Log In</button>
+            <button class="register" [disabled]="awaitingAPI" (click)="goToRegistration()" mat-raised-button>Create Account</button>
+          </div>
         </form>
+        <mat-progress-bar class="spinner" mode="indeterminate" *ngIf="awaitingAPI"></mat-progress-bar>
       </mat-card-content>
     </div>
     <mat-card-content>

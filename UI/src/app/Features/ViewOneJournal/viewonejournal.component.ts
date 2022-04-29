@@ -1,5 +1,6 @@
+import { MatDialog, MatDialogRef } from '@angular/material/dialog';
 import {Component, HostListener, OnInit,} from '@angular/core';
-import { Router } from '@angular/router';
+import { Router, ActivatedRoute } from '@angular/router';
 import { JournalModel } from '../../../../Models/JournalModel';
 import { JournalService } from '../../Services/journal.service';
 
@@ -14,7 +15,7 @@ export class ViewOneJournalComponent {
   data: any;
   journal: JournalModel = new JournalModel();
   isLoaded: boolean = false;
-  constructor(private JournalService: JournalService, private router: Router) {}
+  constructor(private JournalService: JournalService, private router: Router, private route: ActivatedRoute, private dialog: MatDialog) {}
 
   ngOnInit(){
     console.log(this.data);
@@ -28,18 +29,18 @@ export class ViewOneJournalComponent {
     console.log(data);
     this.JournalService.getJournalById(data).subscribe((myjournal) => {
       //myjournal as JournalModel;
-      console.log(myjournal);
-      console.log(myjournal.title?.toString());
-      console.log("Journal Title" + this.journal.title);
+      //console.log(myjournal);
+      //console.log(myjournal.title?.toString());
+      //console.log("Journal Title" + this.journal.title);
       //getting the journal successfully but after this point everything is null
-      console.log("Updated " + myjournal.lastUpdated);
+      //console.log("Updated " + myjournal.lastUpdated);
       this.journal.lastUpdated = myjournal.lastUpdated;
-      console.log(this.journal.lastUpdated + " " + myjournal.lastUpdated);
+      //console.log(this.journal.lastUpdated + " " + myjournal.lastUpdated);
       this.journal.title = myjournal.title;
       this.journal.body = myjournal.body;
       this.journal!.journalID = myjournal.journalID;
       this.isLoaded = true;
-      console.log(myjournal);
+      //console.log(myjournal);
 
     })
 
@@ -56,11 +57,18 @@ export class ViewOneJournalComponent {
        }
 
   delete(id: any){
+    if(confirm('Are you sure you want to delete this journal?')){
     this.JournalService.deleteJournalById(id).subscribe(res => {
       console.log(res);
-      this.router.navigateByUrl('view-journals');
+      this.router.navigate(['../..'], {relativeTo: this.route});
     })
   }
+  //else {
+   // this.router.navigateByUrl('ViewAll');
+  //}
+  }
+
+
   goToMain(){
     this.router.navigateByUrl('main-menu');
   }
@@ -77,4 +85,6 @@ export class ViewOneJournalComponent {
 
 
 }
+
+
 

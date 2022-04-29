@@ -15,6 +15,13 @@
   margin-top: 50px;
 }
 
+.content{
+  display: flex;
+  height: 100%;
+  width: 100%;
+  flex-direction: column;
+}
+
 mat-card-title,
 mat-card-content {
   display: flex;
@@ -60,4 +67,12 @@ mat-raised-button {
   border: none;
   background-color: #52688F;
 
+}
+
+::ng-deep .mat-progress-bar-fill::after {
+  background-color: #E3E7F1;
+}
+
+::ng-deep .mat-progress-bar-buffer {
+    background: #52688F;
 }
