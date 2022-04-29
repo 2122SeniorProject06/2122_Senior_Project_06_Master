@@ -3,7 +3,7 @@
 // The list of file replacements can be found in `angular.json`.
 
 export const environment = {
-  api: 'http://proud-grass-08e024b0f.1.azurestaticapps.net:5000',
+  api: 'https://proud-grass-08e024b0f.1.azurestaticapps.net/api',
   production: false,
 
 };
