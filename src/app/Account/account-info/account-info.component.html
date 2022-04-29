@@ -1,0 +1,45 @@
+<div class="flex-container">
+  <h3 class="section-title">Account Info</h3>
+  <hr class="splitter">
+  <div id="display-values" class="flex-container" *ngIf="!isEdit">
+    <div class="value-holder">
+      <p class="label">Username:</p>
+      <p class="value">{{accountInfo.username}}</p>
+    </div>
+    <div class="value-holder">
+      <p class="label">Email:</p>
+      <p class="value">{{accountInfo.email}}</p>
+    </div>
+    <div class="edit-button">
+      <button class="buttons" mat-raised-button (click)="switchToEdit()">Edit</button>
+    </div>
+  </div>
+  <form id="edit-values" class="flex-container" *ngIf="isEdit" [formGroup]="accountEdits">
+    <div class="value-editor">
+      <mat-form-field class="new-input">
+        <input matInput placeholder="New Username..." formControlName="usernameCtrl">
+      </mat-form-field>
+      <div class= "errors" *ngIf="!errorResults[3]"> {{errorMessages[3]}}</div>
+    </div>
+    <div class="value-editor">
+      <mat-form-field class="new-input">
+        <input matInput placeholder="New Email..." formControlName="emailCtrl">
+      </mat-form-field>
+      <div class= "errors" *ngIf="!errorResults[2]"> {{errorMessages[2]}}</div>
+    </div>
+    <div class="value-editor">
+      <mat-form-field class="new-input">
+        <input type="password" matInput placeholder="New Password..." formControlName="newPassCtrl">
+      </mat-form-field>
+      <div class= "errors" *ngIf="!errorResults[0]"> {{errorMessages[0]}}</div>
+      <mat-form-field class="new-input">
+        <input  type="password" matInput placeholder="Confirm Password..." formControlName="confirmCtrl">
+      </mat-form-field>
+      <div class= "errors" *ngIf="!errorResults[1]"> {{errorMessages[1]}}</div>
+    </div>
+    <div class="button-format">
+      <button class="buttons" mat-raised-button (click)="cancelEdit()">Cancel</button>
+      <button class="buttons" mat-raised-button (click)="onSubmit()">Save</button>
+    </div>
+  </form>
+</div>

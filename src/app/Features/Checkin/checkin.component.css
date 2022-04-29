@@ -1,0 +1,92 @@
+.check-in-panel {
+  display: flex;
+  flex-direction: column;
+  top: 100px;
+  margin-top: 25px;
+}
+
+.card {
+  max-width: 350px;
+  max-height: auto;
+  align-self: center;
+  margin: 15px;
+  margin-top: 50px;
+}
+
+h1 {
+  font-family: "Roboto";
+  margin-top: 25px;
+}
+
+h2 {
+  font-family: "Roboto";
+}
+
+.mood{
+margin-top: 25px;
+margin-bottom: 15px;
+}
+
+.checkin{
+margin-top: 30px;
+margin-bottom: 15px;
+}
+
+.mat-tab-label-container {
+  display: flex;
+  flex-grow: 1;
+  overflow: hidden;
+  z-index: 1;
+  overflow-x: scroll !important;
+}
+
+.mat-toolbar{
+position: fixed;
+top: 0;
+left: 0%;
+color: white;
+background-color: #52688F;
+}
+
+.home {
+color: #E3E7F1;
+border: none;
+background-color: #52688F;
+top: 25px;
+}
+
+.example-spacer {
+flex: 1 1 auto;
+}
+
+.refresh {
+color: #E3E7F1;
+border: none;
+background-color: #52688F;
+float: right;  
+}
+
+.list-section {
+  margin: 12px 0;
+  text-align:left;
+}
+
+.list-complete-section{
+  align-self: center;
+}
+
+.margin {
+  margin: 0 12px;
+}
+
+ul {
+  list-style-type: none;
+  margin-top: 4px;
+}
+
+.btn {
+color: #52688F;
+border: none;
+background-color: #E3E7F1;
+top: 10px;
+}

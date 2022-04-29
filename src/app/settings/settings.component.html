@@ -1,0 +1,34 @@
+<div class="flex-container">
+    <div *ngIf="!showLoading">
+        <mat-toolbar class="header">
+            <button class="home">
+                <mat-icon (click)="goToMainMenu()">home</mat-icon>
+            </button>
+        </mat-toolbar>
+    </div>
+
+<div class="container">
+    <mat-card class="card" [@loadingAnimation]="!showLoading ? 'notLoading' : 'loading'">
+      <mat-card-content *ngIf="!showLoading" style="height: 100%;">
+        <h3 class="title">Change Background Image</h3>
+        <mat-grid-list cols="2" class='settings-buttons' rowHeight="fit">
+            <mat-grid-tile  (click)="saveBackground('beach.jpg')">
+                <!-- <h3>first tile</h3> -->
+                <img class="image1" src="/assets/beach.jpg" alt="beach" >
+            </mat-grid-tile>
+            <mat-grid-tile  (click)="saveBackground('mountain.jpg')">
+              <img class="image2" src="/assets/mountain.jpg">
+            </mat-grid-tile>
+            <mat-grid-tile (click)="saveBackground('afternoon.jpg')">
+                <img class="image3" src="/assets/afternoon.jpg">
+            </mat-grid-tile>
+            <mat-grid-tile (click)="saveBackground('lake.jpg')">
+                <img class="image4" src="/assets/lake.jpg">
+            </mat-grid-tile>
+          </mat-grid-list>
+      </mat-card-content>
+      <mat-card-content>
+        <app-loading-animation *ngIf="showLoading" [targetRoute]=targetEvent></app-loading-animation>
+    </mat-card-content>
+    </mat-card>
+</div>

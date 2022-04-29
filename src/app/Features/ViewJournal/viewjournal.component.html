@@ -1,0 +1,61 @@
+<mat-toolbar class="header">
+  <button class="home">
+    <mat-icon (click)="goToMainMenu()">home</mat-icon>
+  </button>
+  <button class="home">
+    <mat-icon (click)="goToAddJournal()">create</mat-icon>
+  </button>
+</mat-toolbar>
+
+<!-- <button (click)="logout()"  class="logout">
+  <mat-icon>exit_to_app</mat-icon>
+</button>
+-->
+
+<div class="table-container">
+  <mat-card class="card">
+    <mat-card-content class="card-content">
+      <mat-table #table [dataSource]="dataSource">
+        <!---View Journal Component -->
+
+        <!-- Date Column -->
+        <ng-container matColumnDef="LastUpdated">
+          <mat-header-cell *matHeaderCellDef> Last Updated </mat-header-cell>
+          <mat-cell *matCellDef="let journal">
+            {{ journal.lastUpdated | date: 'short' }}
+          </mat-cell>
+        </ng-container>
+
+        <!-- Title Column -->
+        <ng-container matColumnDef="Title">
+          <mat-header-cell *matHeaderCellDef> Title </mat-header-cell>
+          <mat-cell *matCellDef="let journal"> {{ journal.title }} </mat-cell>
+        </ng-container>
+
+        <!-- Entry Column -->
+        <ng-container matColumnDef="Body">
+          <mat-header-cell *matHeaderCellDef> Entry</mat-header-cell>
+          <mat-cell *matCellDef="let journal"> {{ journal.body }} </mat-cell>
+        </ng-container>
+
+        <!-- Action Column -->
+        <ng-container matColumnDef="Action">
+          <mat-header-cell *matHeaderCellDef> View </mat-header-cell>
+          <mat-cell *matCellDef="let journal">
+            <a [routerLink]="['../View/',journal.journalID]">
+              <button  class="view">
+                <mat-icon (click)="getJournal(journal.journalID)">visibility</mat-icon>
+                <mat-icon ></mat-icon>
+              </button>
+            </a>
+          </mat-cell>
+        </ng-container>
+
+        <mat-header-row *matHeaderRowDef="displayedColumns"></mat-header-row>
+        <mat-row *matRowDef="let row; columns: displayedColumns"></mat-row>
+      </mat-table>
+    </mat-card-content>
+  </mat-card>
+</div>
+
+

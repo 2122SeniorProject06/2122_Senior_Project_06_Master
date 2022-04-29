@@ -1,0 +1,24 @@
+<div class="flex-container">
+    <div *ngIf="!showLoading">
+        <mat-toolbar class="header">
+            <button class="home">
+                <mat-icon (click)="goToMainMenu()">home</mat-icon>
+            </button>
+        </mat-toolbar>
+    </div>
+
+    <div class="container">
+        <mat-card class="card" [@loadingAnimation]="!showLoading ? 'notLoading' : 'loading'">
+            <mat-card-content *ngIf="!showLoading" class="flex-container">
+                <img class="about-us" src="../../assets/SHARD_Logo.png" height="460" width="350">
+                <div class="about-us-text">
+                    <h3 class="about-us">About Us</h3>
+                    <p class="about-us" *ngFor="let para of aboutUs">{{para}}</p>
+                </div>
+            </mat-card-content>
+            <mat-card-content>
+                <app-loading-animation *ngIf="showLoading" [targetRoute]=targetEvent></app-loading-animation>
+            </mat-card-content>
+        </mat-card>
+    </div>
+</div>

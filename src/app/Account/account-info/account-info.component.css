@@ -1,0 +1,143 @@
+.flex-container{
+  margin-top: 2.5%;
+  height: 100%;
+  width: 100%;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  flex-direction: column;
+}
+
+.splitter{
+  width: 100%;
+  margin: 1%;
+}
+
+.section-title{
+  display: flex;
+  margin-bottom: 0%;
+  align-self: start;
+}
+
+.value-holder{
+  height: 100%;
+  width: 80%;
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  margin-bottom: 2.5%;
+}
+
+.value-editor{
+  width: 80%;
+  display: flex;
+  justify-content: flex-start;
+  align-items: flex-start;
+  flex-direction: column;
+  margin-bottom: 2.5%;
+}
+
+.errors{
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  color: red;
+  font-size: small;
+}
+
+.new-input{
+  width: 100%;
+}
+
+.account-list{
+  height: 100%;
+  width: 100%;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  flex-direction: column;
+}
+
+.buttons {
+  background-color: #52688F;
+  color: white;
+}
+
+.label{
+  text-align: left;
+}
+
+.value{
+  text-align: right;
+}
+
+@media screen
+and (orientation: landscape)
+and (max-width: 1199px) {
+  .value-holder {
+    font-size: 2.75vh;
+  }
+  .value-editor {
+    font-size: 2.75vh;
+  }
+  .section-title{
+    font-size: 2.75vw;
+  }
+}
+
+@media screen
+and (orientation: landscape)
+and (min-width: 1200px) {
+  .value-holder {
+    font-size: 2.5vh;
+  }
+  .value-editor {
+    font-size: 2.5vh;
+  }
+  .section-title{
+    font-size: 2.5vh;
+  }
+}
+
+@media screen
+and (orientation: portrait)
+and (max-width: 590px) {
+  .value-holder {
+    font-size: 3.5vw;
+  }
+  .value-editor {
+    font-size: 3.5vw;
+  }
+  .section-title{
+    font-size: 3.5vw;
+  }
+}
+
+@media screen
+and (orientation: portrait)
+and (min-width: 591px) {
+  .value-holder {
+    font-size: 3vw;
+  }
+  .value-editor {
+    font-size: 3vw;
+  }
+  .section-title{
+    font-size: 3vw;
+  }
+}
+
+.button-format{
+  width: 80%;
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+}
+
+.edit-button{
+  width: 80%;
+  display: flex;
+  align-items: center;
+  justify-content: flex-end;
+}
+

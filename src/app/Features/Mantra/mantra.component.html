@@ -1,0 +1,78 @@
+<!--Encourage Feature-->
+<div [align]="['center']" class="mantra-panel">
+
+  <mat-card class="card">
+  
+    <!--Header-->
+    <section>  
+
+      <h1 class="title">Encourage</h1>
+
+      <h2 class="date"> {{currentDate | date:'EEEE, MMMM d'}}th </h2>
+
+    </section>
+  
+    <!--Section 1-->
+    <div class="section1">
+
+      <h3 class="prompt">What are you grateful for?</h3>
+
+      <mat-form-field appearance="fill">
+        <mat-label>1. I am grateful for...</mat-label>
+        <input matInput>
+      </mat-form-field>
+
+      <mat-form-field appearance="fill">
+        <mat-label>2. I am greatful for...</mat-label>
+        <input matInput>
+      </mat-form-field>
+
+      <mat-form-field appearance="fill">
+        <mat-label>3. I am greatful for...</mat-label>
+        <input matInput>
+      </mat-form-field>
+
+    </div>
+
+    <!--Section 2-->
+    <div class="section2">
+
+      <h3 class="prompt">What would make today great?</h3>
+
+      <mat-form-field appearance="fill">
+        <mat-label>Today would be great if...</mat-label>
+        <input matInput>
+      </mat-form-field>
+
+    </div>
+
+    <!--Section 3-->
+    <div class="section3">
+
+      <h3 class="prompt">Daily affirmation for today,</h3>
+
+      <mat-form-field appearance="fill">
+        <mat-label>I can...</mat-label>
+        <input matInput>
+      </mat-form-field>
+
+      <button mat-raised-button color="accent" class="btn" mat-raised-button (click)="openDialog()"> Let's Manifest </button>
+
+    </div>
+
+  </mat-card>
+  
+  <!--ToolBar-->
+  <mat-toolbar>
+
+    <button class="home">
+      <mat-icon (click)="goToMain()">home</mat-icon>
+    </button>
+
+    <span class="example-spacer"></span>
+
+    <button class="refresh">
+      <mat-icon (click)="restartFeature()">refresh</mat-icon>
+    </button>
+    
+  </mat-toolbar>

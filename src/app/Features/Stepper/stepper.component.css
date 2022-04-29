@@ -1,0 +1,62 @@
+.body {background-color: coral;}
+
+.flex-container {
+    height: 100%;
+    width: 100%;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    flex-direction: column;
+    margin-bottom: 0%;
+}
+
+.container {
+    height: 100%;
+    width: 100%;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+}
+
+.user-input {
+    height:100%
+}
+
+.card {
+    max-height: 80%;
+    height: auto;
+    display: flex;
+    text-align: center;
+    justify-content: flex-start;
+    overflow: hidden;
+    padding-bottom: 2%;
+}
+  
+.home {
+    color: #52688F;
+    border: none;
+    background-color: #E3E7F1;
+}
+
+/* Header Styling */
+mat-toolbar.header {
+    z-index: 8888;
+    position: fixed;
+    height: 5%;
+    top: 0;
+    left: 0%;
+    color: white;
+    background-color: #52688F;
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+}
+  
+.home {
+    color: #E3E7F1;
+    border: none;
+    background-color: #52688F;
+    display: flex;
+    align-items: center;
+    height: 100%
+} 

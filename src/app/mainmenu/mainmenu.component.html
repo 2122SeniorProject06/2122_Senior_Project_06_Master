@@ -1,0 +1,64 @@
+<div class="flex-container">
+  <mat-toolbar *ngIf="!showLoading" class="header">
+    <button *ngIf="!isSignedIn" id="notSignedIn" class="signIn" id="/login" (click)="goToSignIn()">
+      <p class="signIn">Sign In</p>
+    </button>
+    <button mat-icon-button *ngIf="isSignedIn" id="signedIn" class="signed-in" [matMenuTriggerFor]="menu">
+      <mat-icon class="bigger-icon">account_circle</mat-icon>
+    </button>
+    <mat-menu #menu="matMenu">
+      <button mat-menu-item id="/account" (click)="goToAccount($event)">
+        <mat-icon>person</mat-icon>
+        <span>ACCOUNT</span>
+      </button>
+      <button mat-menu-item (click)="goToSettings()">
+        <mat-icon>settings</mat-icon>
+        <span>SETTINGS</span>
+      </button>
+      <button mat-menu-item (click)="logout()">
+        <mat-icon>exit_to_app</mat-icon>
+        <span>LOGOUT</span>
+      </button>
+    </mat-menu>
+  </mat-toolbar>
+
+  <div class="container">
+    <mat-card class="card" [@loadingAnimation]="!showLoading ? 'notLoading' : 'loading'">
+      <mat-card-content *ngIf="!showLoading" style="height: 100%;">
+        <h3 class="title">{{testVar}}</h3>
+        <mat-grid-list cols="1" class="activity-buttons" rowHeight="fit">
+          <!--Navigates to the Count Game Feature "Focus"-->
+          <mat-grid-tile id="/count-game" (click)="goToActivity($event)">FOCUS</mat-grid-tile>
+
+          <!--Navigates to the Stepper Feature "Ground"-->
+          <mat-grid-tile id="/stepper" (click)="goToActivity($event)">GROUND</mat-grid-tile>
+
+          <!--Navigates to the Audio Mediation Feature "Relax"-->
+          <mat-grid-tile id="/audio-meditation" (click)="goToActivity($event)">RELAX</mat-grid-tile>
+
+          <!--Navigates to the Deep Breathing Feature "Breathe"-->
+          <mat-grid-tile id="/breathing-component" (click)="goToActivity($event)">BREATHE</mat-grid-tile>
+
+          <!--Navigate to the Mantra Feature "Encourage"-->
+          <mat-grid-tile id="/mantra" (click)="goToActivity($event)">ENCOURAGE</mat-grid-tile>
+
+          <!--Navigates to the Checkin Feature "Check In" -->
+          <mat-grid-tile id="/check-in" (click)="goToActivity($event)">CHECK IN</mat-grid-tile>
+
+          <!--Navigates to the Journaling Feature "Reflect"-->
+          <mat-grid-tile id="/journal" (click)="goToActivity($event)">REFLECT</mat-grid-tile>
+
+          <!--Navigates to the About Page-->
+          <mat-grid-tile id="/about" (click)="goToActivity($event)">ABOUT SHARD</mat-grid-tile>
+        </mat-grid-list>
+      </mat-card-content>\
+      <mat-card-content>
+        <app-loading-animation *ngIf="showLoading" [targetRoute]=targetEvent></app-loading-animation>
+      </mat-card-content>
+    </mat-card>
+  </div>
+
+  <!-- <mat-toolbar *ngIf="!showLoading" class="footer">
+    <i class="footer-text">{{inspireQuote}}</i>
+  </mat-toolbar> -->
+</div>

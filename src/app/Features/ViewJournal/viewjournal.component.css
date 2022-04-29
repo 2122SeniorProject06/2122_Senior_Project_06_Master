@@ -1,0 +1,67 @@
+p {
+  font-family: Lato;
+}
+
+.table-container {
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
+  height: 100%;
+  width: 100%;
+}
+
+.card {
+  width: 65%;
+  height: 80%;
+  display: flex;
+  align-content: center;
+  justify-content: flex-start;
+}
+
+.card-content{
+  overflow-y: scroll;
+  -ms-overflow-style: none;
+  scrollbar-width: none;
+}
+
+.card-content::-webkit-scrollbar{
+  display: none;
+}
+
+.mat-cell {
+  overflow: hidden;
+  white-space: nowrap;
+  text-overflow: ellipsis;
+  display: inline;
+}
+.create-icon, .view {
+ color: #52688F;
+  float: right;
+  border: none;
+  background-color: white;
+
+}
+/* Header Styling */
+mat-toolbar.header {
+  z-index: 8888;
+  position: fixed;
+  height: 5%;
+  top: 0;
+  left: 0%;
+  color: white;
+  background-color: #52688F;
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+}
+
+.home {
+  color: #E3E7F1;
+  border: none;
+  background-color: #52688F;
+  display: flex;
+  align-items: center;
+  height: 100%
+}
+

@@ -1,0 +1,66 @@
+.count-game-panel {
+  display: flex;
+  flex-direction: column;
+  top: 100px;
+  margin-top: 25px;
+}
+
+.card{
+  max-width: 350px;
+  max-height: 350px;
+  align-self: center;
+  margin: 15px;
+}
+
+h1 {
+  font-family: "Roboto";
+  margin-top: 25px;
+}
+
+h2 {
+  font-family: "Arial";
+  margin-left: 25px;
+}
+
+.countdown-buttons {
+  margin-top: 10px;
+  max-width: 100px;
+  align-self: center;
+}
+
+.countdown-buttons button{
+  margin-top: 10px;
+}
+
+.wrong {
+  background-color: red;
+}
+
+.right{
+  background-color: limegreen;
+}
+
+.home {
+  color: #E3E7F1;
+  border: none;
+  background-color: #52688F;
+}
+
+.mat-toolbar{
+  position: fixed;
+  top: 0;
+  left: 0%;
+  color: white;
+  background-color: #52688F;
+}
+
+.example-spacer {
+  flex: 1 1 auto;
+}
+
+.refresh {
+  color: #E3E7F1;
+  border: none;
+  background-color: #52688F;
+  float: right;  
+}

@@ -1,0 +1,46 @@
+
+.home {
+    color: #E3E7F1;
+    border: none;
+    background-color: #52688F;
+  
+  }
+  .mat-toolbar{
+    position: fixed;
+    top: 0;
+    left: 0%;
+    color: white;
+    background-color: #52688F;
+  
+  }
+.Button
+{
+    text-align: center;
+    display:flex;
+    top: 50%;
+    left: 0%;
+    position:relative;
+    box-sizing: border-box;
+    width: 50px;
+    height: 50px;
+    border-width: 33px 0px 33px 71px;
+    border-color: transparent transparent transparent #202020;
+  
+    
+
+}
+.Button2
+{
+    width: 76px;
+    height: 76px;
+
+}
+
+
+.card {
+    max-width: 250px;
+    align-self: center;
+    top: 250px;
+    margin: 15px;
+    opacity:0.75;
+}

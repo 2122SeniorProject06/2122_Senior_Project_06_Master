@@ -1,0 +1,22 @@
+<div class="flex-container">
+    <div *ngIf="!showLoading">
+      <mat-toolbar class="header">
+        <button class="home">
+          <mat-icon (click)="goToMainMenu()">home</mat-icon>
+        </button>
+      </mat-toolbar>
+    </div>
+
+    <div class="container">
+        <mat-card class="card">
+            <mat-card-title *ngIf="!showLoading">Hello {{userAccount.username}}</mat-card-title>
+            <mat-card-content *ngIf="!showLoading" class="content">
+              <app-account-info  class="partFormatting" [accountInfo]="userAccount"></app-account-info>
+              <app-account-metrics class="partFormatting"></app-account-metrics>
+            </mat-card-content>
+            <mat-card-content>
+              <app-loading-animation *ngIf="showLoading" [targetRoute]=targetEvent></app-loading-animation>
+            </mat-card-content>
+        </mat-card>
+    </div>
+</div>

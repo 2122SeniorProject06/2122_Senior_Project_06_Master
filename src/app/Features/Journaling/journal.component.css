@@ -1,0 +1,56 @@
+.container{
+  height: 100%;
+  width: 100%;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+}
+
+.card {
+  width: 65%;
+  width: auto;
+  display: flex;
+  text-align: center;
+  justify-content: center;
+
+}
+
+.add {
+  background-color: #52688F;
+  color: white;
+  float: right;
+}
+.mat-form-field, .form, .body, .title {
+  width: 100%;
+  min-width: auto;
+  justify-content: center;
+  display: center;
+}
+.mat-card-content{
+  width: 100%;
+  height: 100%;
+  display: flex;
+}
+
+/* Header Styling */
+mat-toolbar.header {
+  z-index: 8888;
+  position: fixed;
+  height: 5%;
+  top: 0;
+  left: 0%;
+  color: white;
+  background-color: #52688F;
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+}
+
+.home {
+  color: #E3E7F1;
+  border: none;
+  background-color: #52688F;
+  display: flex;
+  align-items: center;
+  height: 100%
+}

@@ -1,0 +1,35 @@
+<mat-toolbar>
+    <button class="home" (click)="goToMain()">
+    <mat-icon>home</mat-icon>
+    </button>
+    <span class="example-spacer"></span>
+    </mat-toolbar>
+<body>
+    
+<div [align]="['center']">
+    <mat-card class="card">
+        <link href="https://fonts.googleapis.com/css?family=Poppins&display=swap" rel="stylesheet">     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.8.2/css/all.css">
+    
+
+<button class= "Button"  (click)="playsound()" *ngIf="!isPlaying" >
+
+</button>
+
+<button class="Button2" (click)="pausesound()" *ngIf="isPlaying">
+<mat-icon>pause</mat-icon>
+</button>
+ 
+
+
+   
+    </mat-card>
+</div>
+<mat-toolbar>
+    <button class="home" (click)="goToMain()">
+    <mat-icon>home</mat-icon>
+    </button>
+    <span class="example-spacer"></span>
+    </mat-toolbar>
+    
+</body>
+

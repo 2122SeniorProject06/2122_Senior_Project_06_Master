@@ -1,0 +1,179 @@
+<!-- <mat-vertical-stepper>
+  <mat-step>
+    <ul>
+      <li>Test</li>
+      <li *ngIf="steps[0]">Select 5 things.</li>
+      <li *ngIf="steps[1]">Select 4 things.</li>
+      <li *ngIf="steps[2]">Select 3 things.</li>
+      <li *ngIf="steps[3]">Select 2 things.</li>
+      <li *ngIf="steps[4]">Select 1 things.</li>
+      <button ((click))="onClick()">Click here to switch views.</button>
+    </ul>
+  </mat-step>
+</mat-vertical-stepper> -->
+
+<div class="flex-container">
+  <div *ngIf="!showLoading">
+    <mat-toolbar class="header">
+      <button class="home">
+        <mat-icon (click)="goToMainMenu()">home</mat-icon>
+      </button>
+      <button class="home">
+        <mat-icon (click)="restartStepper()">refresh</mat-icon>
+      </button>
+    </mat-toolbar>
+  </div>
+
+  <div class="container">
+    <mat-card class="card">
+      <mat-card-content *ngIf="!showLoading" class="flex-container" [@loadingAnimation]="!showLoading ? 'notLoading' : 'loading'">
+        <mat-vertical-stepper class="user-input" [linear]="true">
+          <!--Five things to see.-->
+          <mat-step [stepControl]="fiveSights" label ="Enter five things you can see" > 
+            <form [formGroup]="fiveSights">
+              <p [align]="['left']">
+                <mat-form-field>
+                  <input matInput placeholder="Sight #1" formControlName = "firstCtrl"required>
+                </mat-form-field>
+              </p>
+              <p [align]="['left']">
+                <mat-form-field>
+                  <input matInput placeholder="Sight #2" formControlName = "secondCtrl"required>
+                </mat-form-field>
+              </p>
+              <p [align]="['left']">
+                <mat-form-field>
+                  <input matInput placeholder="Sight #3" formControlName = "thirdCtrl"required>
+                </mat-form-field>
+              </p>
+              <p [align]="['left']">
+                <mat-form-field>
+                  <input matInput placeholder="Sight #4" formControlName = "fourthCtrl"required>
+                </mat-form-field>
+              </p>
+              <p [align]="['left']">
+                <mat-form-field>
+                  <input matInput placeholder="Sight #5" formControlName = "fifthCtrl"required>
+                </mat-form-field>
+              </p>
+              <div>
+                <button mat-button matStepperNext>Next</button>
+              </div>
+            </form>
+          </mat-step>
+
+          <!--Four things to touch.-->
+          <mat-step [stepControl]="fourTouches" label = "Enter four things you can touch">
+            <form [formGroup]="fourTouches">
+              <p [align]="['left']">
+                <mat-form-field>
+                  <input matInput placeholder="Touch #1" formControlName = "firstCtrl"required>
+                </mat-form-field>
+              </p>
+              <p [align]="['left']">
+                <mat-form-field>
+                  <input matInput placeholder="Touch #2" formControlName = "secondCtrl"required>
+                </mat-form-field>
+              </p>
+              <p [align]="['left']">
+                <mat-form-field>
+                  <input matInput placeholder="Touch #3" formControlName = "thirdCtrl"required>
+                </mat-form-field>
+              </p>
+              <p [align]="['left']">
+                <mat-form-field>
+                  <input matInput placeholder="Touch #4" formControlName = "fourthCtrl"required>
+                </mat-form-field>
+              </p>
+              <div>
+                <button mat-button matStepperPrevious>Back</button>
+                <button mat-button matStepperNext>Next</button>
+              </div>
+            </form>
+          </mat-step>
+
+          <!--Three things to hear.-->
+          <mat-step [stepControl]="threeSounds" label= "Enter three things you can hear">
+            <form [formGroup]="threeSounds">
+              <p [align]="['left']">
+                <mat-form-field>
+                  <input matInput placeholder="Sound #1" formControlName = "firstCtrl"required>
+                </mat-form-field>
+              </p>
+              <p [align]="['left']">
+                <mat-form-field>
+                  <input matInput placeholder="Sound #2" formControlName = "secondCtrl"required>
+                </mat-form-field>
+              </p>
+              <p [align]="['left']">
+                <mat-form-field>
+                  <input matInput placeholder="Sound #3" formControlName = "thirdCtrl"required>
+                </mat-form-field>
+              </p>
+              <div>
+                <button mat-button matStepperPrevious>Back</button>
+                <button mat-button matStepperNext>Next</button>
+              </div>
+            </form>
+          </mat-step>
+
+          <!--Two things to smell.-->
+          <mat-step [stepControl]="twoSmells" label = "Enter two things you can smell">
+            <form [formGroup]="twoSmells">
+              <p [align]="['left']">
+                <mat-form-field>
+                  <input matInput placeholder="Smell #1" formControlName = "firstCtrl"required>
+                </mat-form-field>
+              </p>
+              <p [align]="['left']">
+                <mat-form-field>
+                  <input matInput placeholder="Smell #2" formControlName = "secondCtrl"required>
+                </mat-form-field>
+              </p>
+              <div>
+                <button mat-button matStepperPrevious>Back</button>
+                <button mat-button matStepperNext>Next</button>
+              </div>
+            </form>
+          </mat-step>
+
+          <!--One thing to taste.-->
+          <mat-step [stepControl]="oneTaste" label = "Enter one thing you can taste">
+            <form [formGroup]="oneTaste">
+              <p [align]="['left']">
+                <mat-form-field>
+                  <input matInput placeholder="Taste #1" formControlName = "firstCtrl"required>
+                </mat-form-field>
+              </p>
+            </form>
+            <div>
+              <button mat-button matStepperPrevious (click)="goToMainMenu()">Home</button>
+              <button mat-button matStepperPrevious (click)="restartStepper()">Restart</button>
+            </div>
+          </mat-step>
+        </mat-vertical-stepper>
+      </mat-card-content>
+      <mat-card-content>
+        <app-loading-animation *ngIf="showLoading" [targetRoute]=targetEvent></app-loading-animation>
+      </mat-card-content>
+    </mat-card>
+  </div>
+</div>
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+      

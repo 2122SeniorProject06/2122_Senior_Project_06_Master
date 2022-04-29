@@ -1,0 +1,87 @@
+<!--Check In Feature-->
+<div [align]="['center']" class="check-in-panel">
+
+  <mat-card class="card" mat-elevation-z9>
+    
+    <!--Header--> 
+    <section>  
+
+      <h1 class="title">Check In</h1>
+      <h2 class="date"> {{currentDate | date:'EEEE, MMMM d'}}th </h2>
+
+    </section>
+
+ 
+    <body data-spy="scroll" data-target=".navbar" data-offset="50">
+
+
+      <!--Check List-->
+      <section class="section">
+        <span class="list-section">
+         <b>Here is your self-care checklist:</b>
+          <ul>
+            <li *ngFor="let subtask of task.subtasks">
+              <mat-checkbox [(ngModel)]="subtask.completed"
+                            [color]="subtask.color"
+                            (ngModelChange)="updateAllComplete()">
+                {{subtask.taskname}}
+              </mat-checkbox>
+            </li>
+          </ul>
+        </span>
+
+        <span class="list-complete-section">
+          <mat-checkbox class="margin"
+                        [checked]="allComplete"
+                        [color]="task.color"
+                        [indeterminate]="someComplete()"
+                        (change)="setAll($event.checked)">
+            <i>{{task.taskname}}</i>
+          </mat-checkbox>
+        </span>
+
+      </section>
+
+   <!--Current Mood--> 
+      <section>
+
+        <div class="mood"><b> How are you feeling today?</b></div>
+
+          <mat-tab-group mat-stretch-tabs class="example-stretched-tabs mat-elevation-z4">
+              <mat-tab label="Anxious"></mat-tab>
+              <mat-tab label="Angry"></mat-tab>
+              <mat-tab label="Sad"></mat-tab>
+              <mat-tab label="Stressed"></mat-tab>
+              <mat-tab label="Lonely"></mat-tab>
+              <mat-tab label="Tierd"></mat-tab>
+              <mat-tab label="Bored"></mat-tab>
+              <mat-tab label="OK"></mat-tab>
+              <mat-tab label="Calm"></mat-tab>
+              <mat-tab label="Motivated"></mat-tab>
+              <mat-tab label="Loved"></mat-tab>
+              <mat-tab label="Proud"></mat-tab>
+              <mat-tab label="Joyful"></mat-tab>
+          </mat-tab-group>
+
+      </section>
+
+         <button mat-raised-button color="accent" class="btn" mat-raised-button (click)="openDialog()">Pick one</button>
+
+    </body>
+
+  </mat-card>
+  
+  <!--ToolBar-->
+  <mat-toolbar>
+
+      <button class="home">
+        <mat-icon (click)="goToMain()">home</mat-icon>
+      </button>
+
+      <span class="example-spacer"></span>
+
+      <button class="refresh">
+        <mat-icon (click)="restartCheckIn()">refresh</mat-icon>
+      </button>
+
+  </mat-toolbar>

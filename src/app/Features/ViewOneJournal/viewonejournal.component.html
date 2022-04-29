@@ -1,0 +1,32 @@
+<mat-toolbar class="header">
+  <button class="home" (click)="goToMain()">
+    <mat-icon>home</mat-icon>
+  </button>
+  <button class="home" (click)="goToEdit(journal.journalID)">
+    <mat-icon>undo</mat-icon>
+  </button>
+</mat-toolbar>
+
+<div class="container">
+  <mat-card class="card">
+    <div class="one-journal" *ngIf="isLoaded">
+      <mat-card-title>Title</mat-card-title>
+      <br>
+      <mat-card-content>
+        {{journal.title}}
+        <br>
+        <h2>Last Updated</h2>
+        {{journal.lastUpdated | date: 'short' }}
+        <h2>Entry</h2>
+        {{journal.body}}
+        <br>
+        <button class="delete" (click)="delete(journal.journalID)">
+          <mat-icon>delete</mat-icon>
+        </button>
+      </mat-card-content>
+    </div>
+  </mat-card>
+</div>
+
+
+

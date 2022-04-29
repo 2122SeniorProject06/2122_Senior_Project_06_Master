@@ -1,0 +1,161 @@
+<div [align]="['center']" class="count-game-panel">
+
+  <h1 class="title">Focus</h1>    
+
+  <!--Count Game-->
+  <mat-card class="card">
+
+    <mat-horizontal-stepper labelPosition="bottom"
+                            [linear]="true">
+
+    <mat-step>
+
+        <ng-template matStepLabel></ng-template>
+
+        <h2><b>Lets countdown by {{countVal}} starting at {{startVal}}</b></h2>
+
+            <div class="countdown-buttons">
+
+                <button  [ngClass]="{'wrong': newColor}" (click)="toggleColorOne()" mat-raised-button color="primary">
+                {{val1}}
+                </button>
+            
+                <button [ngClass]="{'wrong': newColor}" (click)="toggleColorOne()" mat-raised-button color="primary">
+                {{val2}}
+                </button>
+
+                <button [ngClass]="{'right': newColor}" (click)="toggleColorOne()" mat-raised-button color="primary" matStepperNext>
+                {{val3}}
+                </button>
+
+            </div>
+
+      </mat-step>
+
+      <mat-step >
+
+          <ng-template matStepLabel></ng-template>
+
+          <h2><b>Lets countdown by {{countVal}} from {{val3}}</b></h2>
+
+          <div class="countdown-buttons">
+
+              <button [ngClass]="{'wrong': newColorTwo}" (click)="toggleColorTwo()" mat-raised-button color="primary">
+              {{val4}}
+              </button>
+
+              <button [ngClass]="{'right': newColorTwo}" (click)="toggleColorTwo()" mat-raised-button color="primary" matStepperNext>
+              {{val5}}
+              </button>
+              
+              <button [ngClass]="{'wrong': newColorTwo}" (click)="toggleColorTwo()" mat-raised-button color="primary">
+              {{val6}}
+              </button>
+
+          </div>
+
+      </mat-step>
+
+      <mat-step >
+          
+          <ng-template matStepLabel></ng-template>
+
+          <h2><b>Lets countdown by {{countVal}} from {{val5}}</b></h2>
+
+          <div class="countdown-buttons">
+
+              <button [ngClass]="{'wrong': newColorThree}" (click)="toggleColorThree()" mat-raised-button color="primary">
+              {{val7}}
+              </button>
+
+              <button [ngClass]="{'wrong': newColorThree}" (click)="toggleColorThree()" mat-raised-button color="primary">
+              {{val8}}
+              </button>
+
+              <button [ngClass]="{'right': newColorThree}" (click)="toggleColorThree()" mat-raised-button color="primary" matStepperNext>
+              {{val9}}
+              </button>
+
+          </div>
+
+      </mat-step>
+
+      <mat-step >
+          
+          <ng-template matStepLabel></ng-template>
+
+          <h2><b>Lets countdown by {{countVal}} from {{val9}}</b></h2>
+
+          <div class="countdown-buttons">
+
+            <button [ngClass]="{'right': newColorFour}" (click)="toggleColorFour()" mat-raised-button color="primary" matStepperNext>
+            {{val10}}
+            </button>
+            
+            <button [ngClass]="{'wrong': newColorFour}" (click)="toggleColorFour()" mat-raised-button color="primary">
+            {{val11}}
+              </button>
+
+              <button [ngClass]="{'wrong': newColorFour}" (click)="toggleColorFour()" mat-raised-button color="primary">
+            {{val12}}
+              </button>
+
+          </div>
+
+      </mat-step>
+
+      <mat-step >
+          
+          <ng-template matStepLabel></ng-template>
+
+          <h2><b>Lets countdown by {{countVal}} from {{val10}}</b></h2>
+
+          <div class="countdown-buttons">
+
+              <button [ngClass]="{'wrong': newColorFive}" (click)="toggleColorFive()" mat-raised-button color="primary">
+              {{val13}}
+              </button>
+              <button [ngClass]="{'right': newColorFive}" (click)="toggleColorFive()" mat-raised-button color="primary" matStepperNext>
+              {{val14}}
+              </button>
+              <button [ngClass]="{'wrong': newColorFive}" (click)="toggleColorFive()" mat-raised-button color="primary">
+              {{val15}}
+              </button>
+          </div>
+
+      </mat-step>
+
+      <mat-step >
+
+        <ng-template matStepLabel></ng-template>
+
+        <div class="countdown-buttons">
+
+            <button mat-raised-button color="accent" class="home" (click)="restartCount()">
+              Play Again
+            </button>
+
+        </div>
+
+      </mat-step>
+
+    </mat-horizontal-stepper>
+
+  </mat-card>
+
+  <!--ToolBar-->
+  <mat-toolbar>
+
+    <button class="home">
+      <mat-icon (click)="goToMain()">home</mat-icon>
+    </button>
+
+    <span class="example-spacer"></span>
+
+    <button class="refresh">
+      <mat-icon (click)="restartCount()">refresh</mat-icon>
+    </button>
+
+  </mat-toolbar>
+
+</div>

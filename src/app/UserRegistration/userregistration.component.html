@@ -1,0 +1,72 @@
+<div class="flex-container">
+  <div *ngIf="!showLoading">
+    <mat-toolbar class="header">
+        <button class="home">
+          <mat-icon (click)="goToMainMenu()">home</mat-icon>
+        </button>
+    </mat-toolbar>
+  </div>
+
+  <div class="container">
+    <mat-card class="card" [@loadingAnimation]="!showLoading ? 'autoNotLoading' : 'loading'">
+      <mat-card-title *ngIf="!showLoading">Create New Account</mat-card-title>
+      <mat-card-content *ngIf="!showLoading" class="login-form">
+        <form [formGroup]="form" (ngSubmit)="Register()" class="sign-up-form" novalidate>
+          <div class="field-div">
+            <mat-form-field>
+              <input 
+                id = "username"
+                type="text" 
+                matInput placeholder="Username" 
+                formControlName="Username" 
+                name = "username"
+                required>
+            </mat-form-field>
+            <!-- <div *ngIf= "ifNull[0]">hello all</div> -->
+            <div class= "errors" *ngIf="!errorResults[2]"> {{errorMessages[2]}}</div>
+          </div>
+          <div class="field-div">
+            <mat-form-field>
+              <input 
+                id = "email"
+                type="text" 
+                matInput placeholder="Email" 
+                formControlName="Email" 
+                required>
+            </mat-form-field>
+            <div class= "errors" *ngIf="!errorResults[0]"> {{errorMessages[0]}}</div>
+          </div>
+          <div class="field-div">
+            <mat-form-field>
+              <input 
+                id = "password"
+                type="password" 
+                matInput placeholder="Password" 
+                formControlName="Password" 
+                required>
+            </mat-form-field>
+            <div class= "errors" *ngIf="!errorResults[3]" [innerText]="errorMessages[3]"></div>
+          </div>
+          <div class="field-div">
+            <mat-form-field>
+              <input 
+                id = "confirmpassword"
+                type="password" 
+                matInput placeholder="Confirm Password" 
+                formControlName="confirmpassword"
+                required>
+            </mat-form-field>
+            <div class= "errors" *ngIf="!errorResults[1]"> {{errorMessages[1]}}</div>
+          </div>
+          <div class="registration-buttons">
+            <button class="login" (click)="goToLogin()" mat-raised-button>Login</button>
+            <button class="register" mat-raised-button>Register</button>
+          </div>
+        </form>
+      </mat-card-content>
+      <mat-card-content>
+        <app-loading-animation *ngIf="showLoading" [targetRoute]=targetEvent></app-loading-animation>
+      </mat-card-content>
+    </mat-card>
+  </div>
+</div>

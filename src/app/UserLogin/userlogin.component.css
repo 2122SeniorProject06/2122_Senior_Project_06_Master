@@ -1,0 +1,63 @@
+.mat-form-field {
+  width: 100%;
+  min-width: 300px;
+}
+
+.flex-container{
+  display: flex;
+  height: 100%;
+  width: 100%;
+  justify-content: center;
+  align-items: center;
+}
+
+.card{
+  margin-top: 50px;
+}
+
+mat-card-title,
+mat-card-content {
+  display: flex;
+  justify-content: center;
+}
+mat-raised-button {
+  display: flex;
+  justify-content: flex-end;
+  background-color: #BDC6D9;
+}
+.login {
+  color: white;
+  background-color: #52688F;
+  justify-content: flex-end;
+  float: right;
+}
+
+.register{
+  color: white;
+  background-color: #52688F;
+  float: left;
+  justify-content: flex-start;
+}
+.mat-toolbar{
+  position: fixed;
+  top: 0;
+  left: 0%;
+  color: white;
+  background-color: #52688F;
+
+}
+
+.create {
+  color: #52688F;
+  border: none;
+  background-color: #E3E7F1;
+  float: right;
+
+
+}
+.home {
+  color: #E3E7F1;
+  border: none;
+  background-color: #52688F;
+
+}

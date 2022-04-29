@@ -1,0 +1,58 @@
+.mantra-panel {
+  display: flex;
+  flex-direction: column;
+  top: 100px;
+  margin-top: 25px;
+}
+
+.card {
+  max-width: 350px;
+  max-height: auto;
+  align-self: center;
+  margin: 15px;
+  margin-top: 50px;
+}
+
+.title {
+  font-family: "Roboto";
+}
+
+.date{
+  font-family: "Roboto";
+}
+
+.prompt{
+  font-family: "Roboto";
+}
+
+.mat-toolbar{
+position: fixed;
+top: 0;
+left: 0%;
+color: white;
+background-color: #52688F; 
+}
+
+.home {
+color: #E3E7F1;
+border: none;
+background-color: #52688F;
+}
+
+.example-spacer {
+flex: 1 1 auto;
+}
+
+.refresh {
+color: #E3E7F1;
+border: none;
+background-color: #52688F;
+float: right;  
+}
+
+.btn {
+  color: #52688F;
+  border: none;
+  background-color: #E3E7F1;
+  top: 10px;
+  }
