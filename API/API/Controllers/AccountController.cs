@@ -14,17 +14,10 @@ using _2122_Senior_Project_06.Exceptions;
 
 namespace _2122_Senior_Project_06.Controllers
 {
-     /*
-     * The following controller pulls information from the database for a users account
-     *  @ AuthenticateUser
-     *  @ RetrieveID(maybe on database end?)
-     */
-
     /// <summary>
-    /// The API's login controller.
+    /// Functions for basic injection mitigation and Authentication
     /// </summary>
-    ///  <remarks> Ok so i have very little idea how this is going to work, needs to be discussed with hugo and sarah.
-    ///            Most likely we will need to make a new model as well + new SQL functions  </remarks>
+    /// <remarks> Paired programmed by Andrew, Hugo, and Sarah. </remarks>
     [ApiController]
     [EnableCors("AllowAll")]
     [Route("[controller]")]
@@ -67,7 +60,7 @@ namespace _2122_Senior_Project_06.Controllers
             }
             else
             {
-                return null; //SQL injection
+                return null; //Isn't UserID
             }
         }
 
@@ -198,6 +191,8 @@ namespace _2122_Senior_Project_06.Controllers
         {
             /*
                 change username in database
+                Username is used for display
+                    No extra 
 
             */
             return Ok();

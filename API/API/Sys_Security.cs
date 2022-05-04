@@ -11,13 +11,14 @@ using System.Text.RegularExpressions;
 namespace _2122_Senior_Project_06
 {
     /// <summary>
-    /// Class in charge of system and cyber security.
+    /// Functions for basic injection mitigation and Authentication
     /// </summary>
-    /// <remarks> Created by Andrew Bevilacqua. </remarks>
+    /// <remarks> Paired programmed by Andrew and Hugo. </remarks>
     internal class Sys_Security
     {
         /// <summary>
-        /// Verify input is not a SQL injection attack.
+        /// This solely used to check a string for certain words or series of characters.
+        /// Name was never changed, SQL inejection mitigated by URLencoding
         /// </summary>
         /// <param name="args">The value to check.</param>
         /// <returns>If the value is a SQL injection or not.</returns>
@@ -35,16 +36,11 @@ namespace _2122_Senior_Project_06
 
             for (int i = 0; i <= sqlCheckList.Length - 1; i++)
             {
-
                 if ((CheckString.IndexOf(sqlCheckList[i], StringComparison.OrdinalIgnoreCase) >= 0))
                 {    
-
                     isSQLInjection = true;
-
                 }
-
             }
-
             return isSQLInjection;
             // This is a temporary implementation, certain characters and strings that SHOULD be viable
             // in a valid password conflict with they sqlChecklist array

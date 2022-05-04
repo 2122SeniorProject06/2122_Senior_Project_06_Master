@@ -14,18 +14,10 @@ using _2122_Senior_Project_06.Exceptions;
 
 namespace _2122_Senior_Project_06.Controllers
 {
-     /*
-     * The following controller pulls information from the database for a users account metrics
-     *  @ GetOccurances
-     *  @ GetMostEffective
-     */
-
     /// <summary>
     /// The API's metric controller.
     /// </summary>
-    ///  <remarks> Allows for user metrics to be pulled and processed. Functions produce arrays containing 
-    ///     most effective activities and occurances for each activity(as long as it was effective)  
-    ///  </remarks>
+    ///  <remarks> Paired programmed by Andrew, Hugo, and Sarah. </remarks>
     [ApiController]
     [EnableCors("AllowAll")]
     [Route("[controller]")]
